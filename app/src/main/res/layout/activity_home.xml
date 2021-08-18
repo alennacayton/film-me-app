@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:background="#FFF3ECB2"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeActivity">
 
     <ScrollView
         android:id="@+id/scroll_view"
