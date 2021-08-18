@@ -8,18 +8,36 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
-public class HomeActivity extends AppCompatActivity {
+import java.sql.DatabaseMetaData;
+
+public class ProfileActivity extends AppCompatActivity {
+
+    private TextView tvname;
+    private TextView tvusername;
+    private TextView tvdescription;
+    private TextView tvbirthday;
+    private Button btedit;
+
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_profile);
 
         // Initialize and Assign Variable
 
@@ -50,11 +68,36 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.nb_logout:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
 
 
                 return false;
             }
         });
+
+        this.initComponents();
+        this.initFirebase();
+    }
+
+    private void initComponents(){
+        this.tvname = findViewById(R.id.tv_profile_name);
+        this.tvusername = findViewById(R.id.tv_profile_username);
+        this.tvdescription = findViewById(R.id.tv_profile_description);
+        this.tvbirthday = findViewById(R.id.tv_profile_birthday);
+        this.btedit = findViewById(R.id.btn_profile_edit);
+
+    }
+
+    private void initFirebase(){
+        this.mAuth = FirebaseAuth.getInstance();
+        this.user = this.mAuth.getCurrentUser();
+        this.userId = this.user.getUid();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
     }
 }

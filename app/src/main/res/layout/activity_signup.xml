@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPassword"
+        android:inputType="textPassword|textWebPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,4 +134,25 @@
         android:textColor="#444444"
         app:layout_constraintStart_toStartOf="@+id/pt_pw_su"
         app:layout_constraintTop_toBottomOf="@+id/pt_email" />
+
+    <TextView
+        android:id="@+id/tv_signup_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="Already have an account? Login"
+        app:layout_constraintEnd_toEndOf="@+id/btn_signup_su"
+        app:layout_constraintStart_toStartOf="@+id/btn_signup_su"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup_su" />
+
+    <ProgressBar
+        android:id="@+id/pb_signup"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_signup_su"
+        app:layout_constraintStart_toEndOf="@+id/btn_signup_su"
+        app:layout_constraintTop_toTopOf="@+id/btn_signup_su" />
 </androidx.constraintlayout.widget.ConstraintLayout>
