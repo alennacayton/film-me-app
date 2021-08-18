@@ -3,13 +3,16 @@
     android:layout_width="match_parent"
     android:background="#FFF3ECB2"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeActivity">
 
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="50dp">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,68 +21,98 @@
             android:padding = "10dp">
 
 
-            <LinearLayout
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding = "10dp">
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                android:layout_marginTop="10dp">
 
-                <TextView
-                    android:id="@+id/tv_feature_hp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="serif-monospace"
-                    android:paddingBottom="10dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/gray_card"
+                    android:padding = "10dp">
 
-                    android:text="Feature of the Day"
-                    android:textAlignment="center"
-                    android:textColor="#444444"
-                    android:textSize="34sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_feature_hp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingBottom="10dp"
 
-                <ImageView
-                    android:id="@+id/iv_img_hp"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:paddingBottom="20dp"
+                        android:text="Feature of the Day"
+                        android:textAlignment="center"
+                        android:textColor="@color/dirty_white"
+                        android:textSize="34sp"
+                        android:textStyle="bold" />
 
-                    app:srcCompat="@drawable/sample" />
 
-                <TextView
-                    android:id="@+id/tv_title_hp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/amethysta"
-                    android:text="Kimi No Nawa"
-                    android:textColor="#444444"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_name_hp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/amethysta"
-                    android:text="by Cheska Roque" />
+                    <ImageView
+                        android:id="@+id/iv_img_hp"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:paddingBottom="20dp"
 
-                <TextView
-                    android:id="@+id/tv_rating_hp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/amethysta"
-                    android:paddingBottom="10dp"
-                    android:text="Rating : 5" />
+                        app:srcCompat="@drawable/sample" />
 
-                <TextView
-                    android:id="@+id/tv_desc_hp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/amethysta"
-                    android:justificationMode="inter_word"
-                    android:paddingBottom="10dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac sem sed metus volutpat consequat vestibulum sit amet tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam imperdiet varius felis, ac malesuada sapien ullamcorper id. Donec pulvinar venenatis est in molestie. Phasellus blandit viverra venenatis. Sed at bibendum massa. Praesent egestas eros vel tincidunt porta."
-                    android:textColor="#333333" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_title_hp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amethysta"
+                        android:text="Kimi No Nawa"
+                        android:textColor="@color/dirty_white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_name_hp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amethysta"
+                        android:text="by Cheska Roque"
+
+                        android:textColor="@color/dirty_white"/>
+
+                    <TextView
+                        android:id="@+id/tv_rating_hp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amethysta"
+                        android:paddingBottom="10dp"
+
+                        android:textColor="@color/dirty_white"
+                        android:text="Rating : 5" />
+
+                    <TextView
+                        android:id="@+id/tv_desc_hp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amethysta"
+                        android:textColor="@color/dirty_white"
+                        android:justificationMode="inter_word"
+                        android:paddingBottom="10dp"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac sem sed metus volutpat consequat vestibulum sit amet tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam imperdiet varius felis, ac malesuada sapien ullamcorper id. Donec pulvinar venenatis est in molestie. Phasellus blandit viverra venenatis. Sed at bibendum massa. Praesent egestas eros vel tincidunt porta."
+
+                        />
+
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
 
 
             <LinearLayout
@@ -88,45 +121,194 @@
                 android:orientation="vertical"
                 android:padding = "10dp">
 
-                <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
 
-                <TextView
-                    android:id="@+id/textView17"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="15dp">
 
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/purple_card"
+                            android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_comedy_hp"
+                                android:text="Comedy"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/amethysta"
+                                android:textSize="25dp"/>
 
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/blue_card"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_drama_hp"
+                                android:text="Drama"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/amethysta"
+                                android:textSize="25dp"/>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/pink_card"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_romance_hp"
+                                android:text="Romance"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/amethysta"
+                                android:textSize="25dp"/>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/yellow_card"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_horror_hp"
+                                android:text="Thriller/Horror"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/amethysta"
+                                android:textSize="25dp"/>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/green_card"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_action_hp"
+                                android:text="Action"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/amethysta"
+                                android:textSize="25dp"/>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/orange_card"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_scifi_hp"
+                                android:text="Sci-Fi"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/amethysta"
+                                android:textSize="25dp"/>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+                </LinearLayout>
+
+
+
+
             </LinearLayout>
 
 
         </LinearLayout>
+
 
     </ScrollView>
 

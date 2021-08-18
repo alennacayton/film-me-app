@@ -11,7 +11,6 @@
 
         />
 
-
     <item
         android:id="@+id/nb_bookmarks"
         android:title="Bookmarks"
