@@ -15,5 +15,9 @@
     <color name="yellow_card">#e89d41</color>
     <color name="pink_card">#fd4084</color>
     <color name="gray_card">#666666</color>
+    <color name="orange_card">#fe4d32</color>
     <color name="dirty_white"> #dddddd</color>
+
+
+
 </resources>

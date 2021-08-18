@@ -141,6 +141,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_comedy_hp"
                                 android:text="Comedy"
                                 android:textColor="@color/white"
                                 android:fontFamily="@font/amethysta"
@@ -167,6 +168,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_drama_hp"
                                 android:text="Drama"
                                 android:textColor="@color/white"
                                 android:fontFamily="@font/amethysta"
@@ -189,12 +191,13 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/green_card"
+                            android:background="@color/pink_card"
                             android:padding="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_romance_hp"
                                 android:text="Romance"
                                 android:textColor="@color/white"
                                 android:fontFamily="@font/amethysta"
@@ -223,6 +226,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_horror_hp"
                                 android:text="Thriller/Horror"
                                 android:textColor="@color/white"
                                 android:fontFamily="@font/amethysta"
@@ -245,13 +249,42 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/pink_card"
+                            android:background="@color/green_card"
                             android:padding="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_action_hp"
                                 android:text="Action"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/amethysta"
+                                android:textSize="25dp"/>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="10dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/orange_card"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_scifi_hp"
+                                android:text="Sci-Fi"
                                 android:textColor="@color/white"
                                 android:fontFamily="@font/amethysta"
                                 android:textSize="25dp"/>
