@@ -8,15 +8,20 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +34,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvdescription;
     private TextView tvbirthday;
     private Button btedit;
+    private ProgressBar pbProfile;
+
 
     private FirebaseUser user;
     private FirebaseAuth mAuth;
@@ -97,7 +104,23 @@ public class ProfileActivity extends AppCompatActivity {
         this.user = this.mAuth.getCurrentUser();
         this.userId = this.user.getUid();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Collections.users.name());
+
+        this.pbProfile.setVisibility(View.VISIBLE);
+        reference.child(this.userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               // String email = snapshot.child
+                pbProfile.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                pbProfile.setVisibility(View.GONE);
+
+            }
+        });
 
     }
 }

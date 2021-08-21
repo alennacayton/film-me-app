@@ -45,16 +45,16 @@
         app:layout_constraintVertical_bias="0.053" />
 
     <EditText
-        android:id="@+id/pt_un_lg"
+        android:id="@+id/pt_email_lg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textWebEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_username" />
+        app:layout_constraintTop_toTopOf="@+id/tv_email" />
 
     <EditText
         android:id="@+id/pt_pw_lg"
@@ -69,15 +69,15 @@
         app:layout_constraintTop_toTopOf="@+id/tv_password" />
 
     <TextView
-        android:id="@+id/tv_username"
+        android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="serif-monospace"
-        android:text="Username"
+        android:text="Email"
         android:textColor="#444444"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/pt_un_lg"
+        app:layout_constraintStart_toStartOf="@+id/pt_email_lg"
         app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
 
     <TextView
@@ -90,7 +90,7 @@
         android:textColor="#444444"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/pt_pw_lg"
-        app:layout_constraintTop_toBottomOf="@+id/pt_un_lg" />
+        app:layout_constraintTop_toBottomOf="@+id/pt_email_lg" />
 
     <TextView
         android:id="@+id/tv_signup"

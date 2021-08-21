@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,14 +32,15 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignup;
     private ProgressBar pbSignup;
 
-
     private FirebaseAuth mAuth;
-
+    private FirebaseDatabase database;
+   // private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
 
         this.initFirebase();
         this.initComponents();
@@ -46,6 +49,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance();
     }
 
     private void initComponents() {
@@ -74,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
                 String name =  etName.getText().toString().trim();
                 String username =  etUsername.getText().toString().trim();
 
+                //initFirebase();
                 if(!checkEmpty(email, password, name,username)) {
                     // do something
                     //add user to db
@@ -81,9 +86,6 @@ public class SignupActivity extends AppCompatActivity {
                     User user = new User(email, password, name, username);
                     storeUser(user);
                 }
-
-
-
             }
         });
     }
@@ -119,7 +121,18 @@ public class SignupActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()) {
-                        signupSuccessful();
+                        database.getReference(Collections.users.name()).child(mAuth.getCurrentUser().getUid()).setValue(user)
+                             .addOnCompleteListener(new OnCompleteListener<Void> () {
+
+                                 @Override
+                                 public void onComplete(@NonNull Task<Void> task) {
+                                     if (task.isSuccessful()){
+                                         signupSuccessful();
+                                     } else {
+                                         signupUnsuccessful();
+                                     }
+                                 }
+                             });
                     } else {
                         signupUnsuccessful();
                     }
