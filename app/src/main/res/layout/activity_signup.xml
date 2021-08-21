@@ -155,4 +155,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/btn_signup_su"
         app:layout_constraintStart_toEndOf="@+id/btn_signup_su"
         app:layout_constraintTop_toTopOf="@+id/btn_signup_su" />
+
+    <EditText
+        android:id="@+id/et_su_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Description"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_appname_su"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

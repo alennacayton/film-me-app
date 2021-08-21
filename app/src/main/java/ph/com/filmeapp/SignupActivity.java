@@ -29,6 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etEmail;
     private EditText etPassword;
+    private EditText etDescription;
     private Button btnSignup;
     private ProgressBar pbSignup;
 
@@ -60,6 +61,7 @@ public class SignupActivity extends AppCompatActivity {
         this.etPassword = findViewById(R.id.pt_pw_su);
         this.btnSignup = findViewById(R.id.btn_signup_su);
         this.pbSignup = findViewById(R.id.pb_signup);
+        this.etDescription = findViewById(R.id.et_su_description);
 
         this.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,13 +79,16 @@ public class SignupActivity extends AppCompatActivity {
                 String password =  etPassword.getText().toString().trim();
                 String name =  etName.getText().toString().trim();
                 String username =  etUsername.getText().toString().trim();
+                String description =  etDescription.getText().toString().trim();
+
+
 
                 //initFirebase();
                 if(!checkEmpty(email, password, name,username)) {
                     // do something
                     //add user to db
 
-                    User user = new User(email, password, name, username);
+                    User user = new User(email, password, name, username, description);
                     storeUser(user);
                 }
             }

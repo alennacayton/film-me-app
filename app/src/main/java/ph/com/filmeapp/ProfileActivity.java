@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -33,7 +34,6 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvname;
     private TextView tvusername;
     private TextView tvdescription;
-    private TextView tvbirthday;
     private Button btedit;
     private ProgressBar pbProfile;
     private RecyclerView rvPosts;
@@ -96,10 +96,19 @@ public class ProfileActivity extends AppCompatActivity {
         this.tvname = findViewById(R.id.tv_profile_name);
         this.tvusername = findViewById(R.id.tv_profile_username);
         this.tvdescription = findViewById(R.id.tv_profile_description);
-        this.tvbirthday = findViewById(R.id.tv_profile_birthday);
         this.btedit = findViewById(R.id.btn_profile_edit);
         this.pbProfile = findViewById(R.id.pb_profile);
+        this.btedit = findViewById(R.id.btn_profile_edit);
+        this.rvPosts = findViewById(R.id.rv_profile_post);
 
+        this.btedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                Intent i = new Intent (ProfileActivity.this, EditProfileActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
     private void initFirebase(){
@@ -124,7 +133,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                pbProfile.setVisibility(View.GONE);
 
             }
         });
