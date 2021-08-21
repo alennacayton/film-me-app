@@ -2,6 +2,7 @@ package ph.com.filmeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -35,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvbirthday;
     private Button btedit;
     private ProgressBar pbProfile;
+    private RecyclerView rvPosts;
 
 
     private FirebaseUser user;
@@ -110,7 +112,11 @@ public class ProfileActivity extends AppCompatActivity {
         reference.child(this.userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               // String email = snapshot.child
+                String name = snapshot.child("name").getValue().toString();
+                tvname.setText(name);
+                String username = snapshot.child("username").getValue().toString();
+                tvusername.setText(username);
+
                 pbProfile.setVisibility(View.GONE);
 
             }

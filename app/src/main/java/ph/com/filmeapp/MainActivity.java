@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // button listeners
+        this.initFireBase();
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
