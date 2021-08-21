@@ -62,14 +62,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="DESCRIPTION ABOUT ME "
         app:layout_constraintBottom_toTopOf="@+id/btn_profile_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/gl_middle"
-        app:layout_constraintTop_toBottomOf="@+id/tv_profile_birthday" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_username" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_profile_post"
@@ -78,15 +76,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gl_left" />
-
-    <TextView
-        android:id="@+id/tv_profile_birthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Birthday"
-        app:layout_constraintStart_toStartOf="@+id/tv_profile_username"
-        app:layout_constraintTop_toBottomOf="@+id/tv_profile_username" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
