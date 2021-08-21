@@ -4,25 +4,228 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF3ECB2"
     tools:context=".AddRecomActivity">
 
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="353dp"
-        android:text="Add" />
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="50dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                      >
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/amethysta"
+                            android:text="Upload Image "
+
+                            android:textColor="@color/gray_card"
+                            android:textSize="16dp" />
+
+                        <Button
+                            android:id="@+id/btn_addpost_ar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="Add Post" />
+
+                    </RelativeLayout>
+
+
+                    <ImageButton
+                        android:id="@+id/ib_upload_ar"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        app:srcCompat="@drawable/ic_addimg" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amethysta"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Movie Title "
+                        android:textColor="@color/gray_card" />
+
+                    <EditText
+                        android:id="@+id/pt_title_ar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Title"
+                        android:textColor="@color/gray_card" />
+
+                    <EditText
+                        android:id="@+id/pt_desc_ar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Write something about this movie"
+                        android:inputType="textPersonName"
+                        android:paddingBottom="300dp"
+                        android:textColor="@color/gray_card" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amethysta"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Rating"
+                        android:textColor="@color/gray_card"
+                        android:textSize="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_rating1_ar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="1" />
+
+                        <RadioButton
+                            android:id="@+id/rb_rating2_ar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="2" />
+
+                        <RadioButton
+                            android:id="@+id/rb_rating3_ar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="3" />
+
+                        <RadioButton
+                            android:id="@+id/rb_rating4_ar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="4" />
+
+                        <RadioButton
+                            android:id="@+id/rb_rating5_ar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="5" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amethysta"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Genre"
+                        android:textColor="@color/gray_card"
+                        android:textSize="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_romance_ar"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:text="Romance" />
+
+                        <RadioButton
+                            android:id="@+id/rb_action_ar"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:text="Action" />
+
+                        <RadioButton
+                            android:id="@+id/rb_comedy_ar"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:text="Comedy" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_drama_ar"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:text="Drama" />
+
+                        <RadioButton
+                            android:id="@+id/rb_scifi_ar"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:text="Sci-Fi" />
+
+                        <RadioButton
+                            android:id="@+id/rb_horror_ar"
+                            android:layout_width="125dp"
+                            android:layout_height="wrap_content"
+                            android:text="Thriller/Horror" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigation"
+        android:layout_alignParentBottom="true"
         app:itemBackground="@color/white"
-        app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu_navigation"
-        android:layout_alignParentBottom="true"/>
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation" />
 
 </RelativeLayout>
