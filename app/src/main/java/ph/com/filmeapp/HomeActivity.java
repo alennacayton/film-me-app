@@ -2,12 +2,14 @@ package ph.com.filmeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -15,6 +17,17 @@ import com.google.android.material.navigation.NavigationBarView;
 import org.jetbrains.annotations.NotNull;
 
 public class HomeActivity extends AppCompatActivity {
+
+
+    private CardView cvComedy;
+    private CardView cvDrama;
+    private CardView cvRomance;
+    private CardView cvHorror;
+    private CardView cvAction;
+    private CardView cvScifi;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +63,54 @@ public class HomeActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.nb_logout:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.nb_bookmarks:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
 
 
                 return false;
             }
         });
+
+        // Initializing Components
+
+        initComponents();
+
+
+        // Setting On Click Listeners
+
+        cvComedy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MovieRecomActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+
     }
+
+
+
+
+    private void initComponents(){
+        this.cvComedy = findViewById(R.id.cv_comedy_hp);
+        this.cvDrama = findViewById(R.id.cv_drama_hp);
+        this.cvRomance = findViewById(R.id.cv_romance_hp);
+        this.cvHorror = findViewById(R.id.cv_horror_hp);
+        this.cvAction = findViewById(R.id.cv_action_hp);
+        this.cvScifi = findViewById(R.id.cv_scifi_hp);
+
+    }
+
+
+
 }

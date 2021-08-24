@@ -128,10 +128,11 @@
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_comedy_hp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="15dp"
+                        app:cardCornerRadius="15dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -140,13 +141,13 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/tv_comedy_hp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_comedy_hp"
+                                android:fontFamily="@font/amethysta"
                                 android:text="Comedy"
                                 android:textColor="@color/white"
-                                android:fontFamily="@font/amethysta"
-                                android:textSize="25dp"/>
+                                android:textSize="25dp" />
 
 
                         </RelativeLayout>
@@ -155,10 +156,11 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_drama_hp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -167,13 +169,13 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/tv_drama_hp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_drama_hp"
+                                android:fontFamily="@font/amethysta"
                                 android:text="Drama"
                                 android:textColor="@color/white"
-                                android:fontFamily="@font/amethysta"
-                                android:textSize="25dp"/>
+                                android:textSize="25dp" />
 
 
                         </RelativeLayout>
@@ -183,11 +185,12 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
+                        android:id="@+id/cv_romance_hp"
 
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -196,13 +199,13 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/tv_romance_hp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_romance_hp"
+                                android:fontFamily="@font/amethysta"
                                 android:text="Romance"
                                 android:textColor="@color/white"
-                                android:fontFamily="@font/amethysta"
-                                android:textSize="25dp"/>
+                                android:textSize="25dp" />
 
 
                         </RelativeLayout>
@@ -212,11 +215,12 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
+                        android:id="@+id/cv_horror_hp"
 
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -225,13 +229,13 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/tv_horror_hp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_horror_hp"
+                                android:fontFamily="@font/amethysta"
                                 android:text="Thriller/Horror"
                                 android:textColor="@color/white"
-                                android:fontFamily="@font/amethysta"
-                                android:textSize="25dp"/>
+                                android:textSize="25dp" />
 
 
                         </RelativeLayout>
@@ -241,11 +245,12 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
+                        android:id="@+id/cv_action_hp"
 
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -254,13 +259,13 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/tv_action_hp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_action_hp"
+                                android:fontFamily="@font/amethysta"
                                 android:text="Action"
                                 android:textColor="@color/white"
-                                android:fontFamily="@font/amethysta"
-                                android:textSize="25dp"/>
+                                android:textSize="25dp" />
 
 
                         </RelativeLayout>
@@ -269,11 +274,12 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
+                        android:id="@+id/cv_scifi_hp"
 
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="15dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="15dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -282,13 +288,13 @@
                             android:padding="10dp">
 
                             <TextView
+                                android:id="@+id/tv_scifi_hp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_scifi_hp"
+                                android:fontFamily="@font/amethysta"
                                 android:text="Sci-Fi"
                                 android:textColor="@color/white"
-                                android:fontFamily="@font/amethysta"
-                                android:textSize="25dp"/>
+                                android:textSize="25dp" />
 
 
                         </RelativeLayout>

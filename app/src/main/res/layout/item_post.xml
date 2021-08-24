@@ -42,7 +42,7 @@
 
 
                 <ImageView
-                    android:id="@+id/iv_img_hp"
+                    android:id="@+id/iv_img_mr"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:paddingBottom="20dp"
