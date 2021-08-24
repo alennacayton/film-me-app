@@ -99,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         this.btedit = findViewById(R.id.btn_profile_edit);
         this.pbProfile = findViewById(R.id.pb_profile);
         this.btedit = findViewById(R.id.btn_profile_edit);
-        this.rvPosts = findViewById(R.id.rv_profile_post);
+        this.rvPosts = findViewById(R.id.rv_profile);
 
         this.btedit.setOnClickListener(new View.OnClickListener() {
             @Override
