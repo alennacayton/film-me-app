@@ -61,7 +61,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(@NonNull @NotNull PostViewHolder holder, int position) {
 
 
-
         Post currentItem = postArrayList.get(position);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(cxt, LinearLayoutManager.VERTICAL, false);
@@ -103,10 +102,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
             arrayList.add(new Comment(R.drawable.ic_icon, "Alenna Cayton", "Noice movie" ));
         }
+        if(postArrayList.get(position).getGenre().equals("drama")){
+
+            arrayList.add(new Comment(R.drawable.ic_icon, "Kim Taehyung", "So so good! I was so stunned mygad! The animation is so powerful!" ));
+        }
+        if(postArrayList.get(position).getGenre().equals("drama")){
+
+            arrayList.add(new Comment(R.drawable.ic_icon, "Park Jimin", "Umiyak ako ng sobra. Ginusto ko na bigla magkajowa kasi naghost ako ng bestfriend ko na crush huhuhuhh! relate!" ));
+        }
 
 
         CommentAdapter commentAdapter = new CommentAdapter(arrayList,holder.commentRecyclerView.getContext());
         holder.commentRecyclerView.setAdapter(commentAdapter);
+        //holder.commentRecyclerView.setLayoutFrozen(true);
     }
 
 

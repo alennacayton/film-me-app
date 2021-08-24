@@ -91,7 +91,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_feedbacks_mr"
                     android:layout_width="376dp"
-                    android:layout_height="69dp">
+                    android:layout_height="69dp"
+                    android:nestedScrollingEnabled="false">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
