@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.nb_bookmarks:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), AboutActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
