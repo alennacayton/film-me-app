@@ -10,6 +10,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -26,6 +27,7 @@ public class MovieRecomActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager postLayoutManager;
 
 
+    private TextView tvGenreHome;
 
 
     @Override
@@ -65,36 +67,11 @@ public class MovieRecomActivity extends AppCompatActivity {
             }
         });
 
-/*
-        postRecyclerView = findViewById(R.id.rv_posts_home);
+        this.tvGenreHome = findViewById(R.id.tv_genre_home);
 
-
-        postLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false );
-        postRecyclerView.setLayoutManager(postLayoutManager);
-
-
-
-        // Initialize Data
-
-        DataHelper data = new DataHelper();
-        postArrayList = data.initializeData();
-
-
-
-      //  postRecyclerView.setHasFixedSize(true);
-        postAdapter = new PostAdapter(postArrayList, MovieRecomActivity.this);
-        postRecyclerView.setAdapter(postAdapter);
-       postAdapter.notifyDataSetChanged();
-
-
-        //set the Categories for each array list set in the `ParentViewHolder`
-
-        DataHelper data = new DataHelper();
-        postArrayList = data.initializeData();
-
-
-                */
-
+        if(getIntent()!=null){
+            this.tvGenreHome.setText(getIntent().getStringExtra("item"));
+        }
 
 
 
@@ -151,6 +128,10 @@ public class MovieRecomActivity extends AppCompatActivity {
         postRecyclerView.setAdapter(postAdapter);
         postAdapter.notifyDataSetChanged();
 */
+
+
+
+
 
 
 

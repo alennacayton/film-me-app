@@ -68,7 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     //    holder.commentRecyclerView.setHasFixedSize(true);
 
 
-        holder.tvGenre.setText(currentItem.getGenre());
+       // holder.tvGenre.setText(currentItem.getGenre());
         holder.ivPoster.setImageResource(currentItem.getImageId());
         holder.tvDesc.setText(currentItem.getDesc());
         holder.tvName.setText(currentItem.getName());
@@ -133,15 +133,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
 
-    private int imageId;
-    private String title;
-    private String desc;
-    private String rating;
-    private String name;
-    private String genre;
-
-
-
     // Post ViewHolder
     public static class PostViewHolder extends RecyclerView.ViewHolder{
 
@@ -150,7 +141,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public TextView tvDesc;
         public TextView tvRating;
         public TextView tvName;
-        public TextView tvGenre;
         public RecyclerView commentRecyclerView;
 
 
@@ -163,7 +153,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             this.tvDesc = itemView.findViewById(R.id.tv_desc_mr);
             this.tvRating = itemView.findViewById(R.id.tv_rating_mr);
             this.tvName = itemView.findViewById(R.id.tv_name_mr);
-            this.tvGenre = itemView.findViewById(R.id.tv_genre_mr);
             this.commentRecyclerView = itemView.findViewById(R.id.rv_feedbacks_mr);
 
 

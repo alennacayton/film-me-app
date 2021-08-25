@@ -89,6 +89,56 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, MovieRecomActivity.class);
+                intent.putExtra("item", "Comedy");
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        cvDrama.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MovieRecomActivity.class);
+                intent.putExtra("item", "Drama");
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        cvRomance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MovieRecomActivity.class);
+                intent.putExtra("item", "Romance");
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        cvHorror.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MovieRecomActivity.class);
+                intent.putExtra("item", "Thriller");
+                startActivity(intent);
+                finish();
+            }
+        });
+        cvAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MovieRecomActivity.class);
+                intent.putExtra("item", "Action");
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        cvScifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MovieRecomActivity.class);
+                intent.putExtra("item", "Sci-Fi");
                 startActivity(intent);
                 finish();
             }
