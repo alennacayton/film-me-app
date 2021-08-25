@@ -91,6 +91,10 @@ public class ProfileActivity extends AppCompatActivity {
                         return true;
                     case R.id.nb_profile:
                         return true;
+                    case R.id.nb_bookmarks:
+                        startActivity(new Intent(getApplicationContext(), AboutActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                     case R.id.nb_logout:
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         overridePendingTransition(0,0);

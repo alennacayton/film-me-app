@@ -60,6 +60,7 @@
                         android:paddingLeft="10dp"
                         android:paddingTop="15dp"
                         android:paddingRight="10dp"
+                        android:textStyle="bold"
                         android:text="This mobile application was made in partial fulfillment for the subject Mobile Development. Other than that, this mobile application will be beneficial for movie lovers and movie enthusiasts. With our newly created app this will help the users to freely express their opinions and reviews about a certain movie. This can also encourage the users to try and entertain new movies that will fit their movie palette. Movies provide comfort during these hectic times, so with this application, a lot of people will be informed about certain movies that will entertain them. Interactions with each post is also encouraged in our application. This mobile application came to life because of the developers’ passion in watching movies. The developers hope that the  users will somehow find comfort while using the app.  "
                         android:textAlignment="center"
                         android:textColor="@color/dirty_white"
@@ -101,29 +102,115 @@
                             android:id="@+id/imageView3"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
-                            android:layout_weight="1"
-                            tools:srcCompat="@tools:sample/avatars" />
+                            app:srcCompat="@drawable/myimage" />
 
                     <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:background="@color/green_card"
-                                android:orientation="vertical"
-                                >
+                                android:paddingLeft="10dp"
+                                android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tv_name1_a"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Alenna Jaye Cayton" />
+                            android:justificationMode="inter_word"
+                            android:text="Alenna Jaye Cayton"
+                            android:textColor="@color/dirty_white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/textView8"
+                            android:id="@+id/tv_info1_a"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="She is currently a second year college student in De La Salle University Manila. She is currently taking up Bachelors of Science in Compute Science." />
+                            android:justificationMode="inter_word"
+                            android:text="She is currently a second year college student in De La Salle University Manila. She is currently taking up Bachelors of Science in Compute Science."
+                            android:textColor="@color/dirty_white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                             </LinearLayout>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/green_card"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:id="@+id/imageView4"
+                        app:srcCompat="@drawable/myimage"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/green_card"
+                        android:paddingLeft="10dp"
+                        android:orientation="vertical">
+                    <TextView
+                            android:id="@+id/tv_name2_a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:text="Francesca Mendoza"
+                            android:textColor="@color/dirty_white"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_info2_a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:text="She is currently a second year college student in De La Salle University Manila. She is currently taking up Bachelors of Science in Compute Science."
+                            android:textColor="@color/dirty_white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/green_card"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+                        <ImageView
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:id="@+id/imageView5"
+                            app:srcCompat="@drawable/myimage"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/green_card"
+                            android:paddingLeft="10dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/tv_name3_a"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:justificationMode="inter_word"
+                                android:text="Francheska Roque"
+                                android:textColor="@color/dirty_white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_info3_a"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:justificationMode="inter_word"
+                                android:text="She is currently a second year college student in De La Salle University Manila. She is currently taking up Bachelors of Science in Compute Science."
+                                android:textColor="@color/dirty_white"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
