@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class EditProfileActivity extends AppCompatActivity {
     private EditText etname;
@@ -32,6 +35,10 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth mAuth;
     private String userId;
+
+
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Collections.users.name());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,44 @@ public class EditProfileActivity extends AppCompatActivity {
         this.etemail = findViewById(R.id.et_email);
 
         this.initFirebase();
+
+
+
+
+
+
+
+        btupdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v ) {
+                String name = etname.getText().toString();
+                String username = etusername.getText().toString();
+                String description = etdescription.getText().toString();
+                String password = etpassword.getText().toString();
+                String email = etemail.getText().toString();
+
+                HashMap hashMap = new HashMap();
+                hashMap.put("name", name);
+                hashMap.put("username", username);
+                hashMap.put("description", description);
+                hashMap.put("password", password);
+                hashMap.put("email", email);
+
+
+                etname.setText(name);
+
+                reference.child(getuid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        pbUpdate.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+
+
+
 
         btcancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,4 +141,12 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private String getuid() {
+        return this.user.getUid();
+    }
+
+
+
 }

@@ -188,6 +188,20 @@ public class ProfileActivity extends AppCompatActivity {
                 String username = snapshot.child("username").getValue().toString();
                 tvusername.setText(username);
 
+
+
+
+                String description = snapshot.child("description").getValue().toString();
+                tvdescription.setText(description);
+
+                if (description != "Description"){
+                    getDescription().setVisibility(View.VISIBLE);
+                }
+
+                pbProfile.setVisibility(View.GONE);
+
+
+
                 pbProfile.setVisibility(View.GONE);
 
             }
@@ -198,5 +212,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    private TextView getDescription() {
+        return this.tvdescription;
     }
 }
