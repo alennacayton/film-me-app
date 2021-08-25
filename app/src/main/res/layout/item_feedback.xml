@@ -51,13 +51,14 @@
                 android:layout_height="wrap_content"
                 android:text="Cheska Roque"
                 android:textSize="14sp"
-
+                android:textColor="@color/dirty_white"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_comment_fb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/dirty_white"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac sem sed metus volutpat consequat vestibulum sit dsadsadas dasdsadad sadaaaaa aaaaaaaaaaadsdss tellus. "
                 android:textSize="12sp" />
         </LinearLayout>

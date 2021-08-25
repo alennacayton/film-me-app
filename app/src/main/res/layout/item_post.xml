@@ -106,6 +106,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/input_comment_bg"
                         android:ems="10"
+                        android:textColorHint="@color/dirty_white"
                         android:hint="Add a comment"
                         android:inputType="textPersonName"
                         android:paddingStart="10dp"
