@@ -107,19 +107,19 @@ public class MovieRecomActivity extends AppCompatActivity {
         postArrayList.add(new Post(
                 R.drawable.pulpfiction,
                 "Pulp Fiction",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+                "Lorem ipsum dolor sit amet,  elit,ialiqua. Ut enim ad minim veniamea commodo consequat. Duis autre eu fugiat nullallit anim id est laborum",
                 "3",
                 "Cheska Mendoza","action"));
         postArrayList.add(new Post(
                 R.drawable.starwars,
                 "Star Wars",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus eu risus aliquet venenatis. Mauris ipsum mi, convallis eu vestibulum in, venenatis sit amet risus. Duis aliquet mattis enim ac ornare. Nunc blandit nibh lectus, vitae mattis elit blandit ac. Aenean in semper libero, eget finibus lectus. Proin ullamcorper odio sed ex dapibus blandit. Proin gravida cursus felis, sed porttitor purus sollicitudin a. Duis auctor rutrum dictum. In sagittis, sapien vitae posuere vestibulum, augue neque viverra nibh, a cursus eros magna quis elit.",
                 "5",
                 "Cheska Roque","drama"));
         postArrayList.add(new Post(
                 R.drawable.wandavision,
                 "Wanda Vision",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, truccaecat ct mollit anim id est laborum",
                 "1",
                 "Candy Candy","comedy"));
 

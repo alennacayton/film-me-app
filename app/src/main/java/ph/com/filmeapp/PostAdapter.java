@@ -65,7 +65,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(cxt, LinearLayoutManager.VERTICAL, false);
         holder.commentRecyclerView.setLayoutManager(layoutManager);
-        holder.commentRecyclerView.setHasFixedSize(true);
+    //    holder.commentRecyclerView.setHasFixedSize(true);
 
 
         holder.tvGenre.setText(currentItem.getGenre());
@@ -110,11 +110,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
             arrayList.add(new Comment(R.drawable.ic_icon, "Park Jimin", "Umiyak ako ng sobra. Ginusto ko na bigla magkajowa kasi naghost ako ng bestfriend ko na crush huhuhuhh! relate!" ));
         }
+        if(postArrayList.get(position).getGenre().equals("drama")){
+
+            arrayList.add(new Comment(R.drawable.ic_icon, "Park Jimin", "Umiyak ako ng sobra. Ginusto ko na bigla magkajowa kasi naghost ako ng bestfriend ko na crush huhuhuhh! relate!" ));
+        }
+        if(postArrayList.get(position).getGenre().equals("drama")){
+
+            arrayList.add(new Comment(R.drawable.ic_icon, "Park Jimin", "Umiyak ako ng sobra. Ginusto ko na bigla magkajowa kasi naghost ako ng bestfriend ko na crush huhuhuhh! relate!" ));
+        }
 
 
         CommentAdapter commentAdapter = new CommentAdapter(arrayList,holder.commentRecyclerView.getContext());
         holder.commentRecyclerView.setAdapter(commentAdapter);
-        //holder.commentRecyclerView.setLayoutFrozen(true);
     }
 
 
