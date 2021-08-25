@@ -2,6 +2,7 @@ package ph.com.filmeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -28,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.DatabaseMetaData;
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -37,6 +39,18 @@ public class ProfileActivity extends AppCompatActivity {
     private Button btedit;
     private ProgressBar pbProfile;
     private RecyclerView rvPosts;
+
+
+// postRecyclerView >> rvPosts
+
+    private RecyclerView.Adapter postAdapter;
+    ArrayList<Post> postArrayList = new ArrayList<>();
+    private RecyclerView.LayoutManager postLayoutManager;
+
+
+
+
+
 
 
     private FirebaseUser user;
@@ -90,6 +104,53 @@ public class ProfileActivity extends AppCompatActivity {
 
         this.initComponents();
         this.initFirebase();
+
+
+
+
+
+
+
+        postArrayList.add(new Post(
+                R.drawable.sample,
+                "Kimi No Nawa",
+                "Lorem ipsum dolor  eni ut alrum",
+                "5",
+                "Alenna Cayton","romance"));
+        postArrayList.add(new Post(
+                R.drawable.pulpfiction,
+                "Pulp Fiction",
+                "Lorem ipsum dolor sit amet,  elit,ialiqua. Ut enim ad minim veniamea commodo consequat. Duis autre eu fugiat nullallit anim id est laborum",
+                "3",
+                "Cheska Mendoza","action"));
+        postArrayList.add(new Post(
+                R.drawable.starwars,
+                "Star Wars",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus eu risus aliquet venenatis. Mauris ipsum mi, convallis eu vestibulum in, venenatis sit amet risus. Duis aliquet mattis enim ac ornare. Nunc blandit nibh lectus, vitae mattis elit blandit ac. Aenean in semper libero, eget finibus lectus. Proin ullamcorper odio sed ex dapibus blandit. Proin gravida cursus felis, sed porttitor purus sollicitudin a. Duis auctor rutrum dictum. In sagittis, sapien vitae posuere vestibulum, augue neque viverra nibh, a cursus eros magna quis elit.",
+                "5",
+                "Cheska Roque","drama"));
+        postArrayList.add(new Post(
+                R.drawable.wandavision,
+                "Wanda Vision",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, truccaecat ct mollit anim id est laborum",
+                "1",
+                "Candy Candy","comedy"));
+
+
+
+        this.postLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false );
+        this.rvPosts.setLayoutManager(postLayoutManager);
+
+        this.postAdapter = new PostAdapter(postArrayList, ProfileActivity.this);
+        this.rvPosts.setAdapter(postAdapter);
+        this.postAdapter.notifyDataSetChanged();
+
+
+
+
+
+
+
     }
 
     private void initComponents(){
