@@ -69,9 +69,9 @@ public class ProfileActivity extends AppCompatActivity {
         bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.BLACK));
 
 
-        // Set Home Selected
+        // Set Profile Selected
 
-        bottomNavigationView.setSelectedItemId(R.id.nb_home);
+        bottomNavigationView.setSelectedItemId(R.id.nb_profile);
 
         // Perform ItemSelectedListener
 
@@ -82,14 +82,14 @@ public class ProfileActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
 
                     case R.id.nb_home:
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.nb_add:
                         startActivity(new Intent(getApplicationContext(), AddRecomActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.nb_profile:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.nb_logout:
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));

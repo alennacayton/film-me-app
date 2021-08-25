@@ -41,7 +41,6 @@ public class MovieRecomActivity extends AppCompatActivity {
         bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setItemTextColor(ColorStateList.valueOf(Color.BLACK));
 
-
         // Set Home Selected
 
         bottomNavigationView.setSelectedItemId(R.id.nb_home);
@@ -60,12 +59,25 @@ public class MovieRecomActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), AddRecomActivity.class));
                         overridePendingTransition(0,0);
                         return true;
+                    case R.id.nb_profile:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.nb_logout:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.nb_bookmarks:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
                 }
 
 
                 return false;
             }
         });
+
 
         this.tvGenreHome = findViewById(R.id.tv_genre_home);
 
