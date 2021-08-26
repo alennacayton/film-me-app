@@ -58,14 +58,14 @@
                         android:layout_height="300dp"
                         android:paddingBottom="20dp"
 
-                        app:srcCompat="@drawable/sample" />
+                        app:srcCompat="@drawable/centi" />
 
                     <TextView
                         android:id="@+id/tv_title_hp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
-                        android:text="Kimi No Nawa"
+                        android:text="5 Centimeters per Second"
                         android:textColor="@color/dirty_white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -75,9 +75,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
-                        android:text="by Cheska Roque"
+                        android:text="by Jeff Shannon"
 
-                        android:textColor="@color/dirty_white"/>
+                        android:textColor="@color/dirty_white" />
 
                     <TextView
                         android:id="@+id/tv_rating_hp"
@@ -97,7 +97,7 @@
                         android:textColor="@color/dirty_white"
                         android:justificationMode="inter_word"
                         android:paddingBottom="10dp"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac sem sed metus volutpat consequat vestibulum sit amet tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam imperdiet varius felis, ac malesuada sapien ullamcorper id. Donec pulvinar venenatis est in molestie. Phasellus blandit viverra venenatis. Sed at bibendum massa. Praesent egestas eros vel tincidunt porta."
+                        android:text="This movie blew me away - it was amazing. I can't tell you anything more other than it revolves around love, life and time. This film is stunning you simply must watch it! Don't be put off if you're not interested by the end of the first episode because by the end of the third episode everything comes together in one amazingly beautiful package. If ever a film deserved 10/10 this was it. If you have ever felt love you will adore this movie because it captures that feeling flawlessly."
 
                         />
 

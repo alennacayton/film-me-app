@@ -39,14 +39,14 @@
                         android:text="Kimi No Nawa"
                         android:textAlignment="center"
                         android:textColor="@color/dirty_white"
-                        android:textSize="25sp"
+                        android:textSize="28sp"
                         android:textStyle="bold" />
 
 
                     <ImageView
                         android:id="@+id/iv_img_mr"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="300dp"
                         android:paddingBottom="20dp"
 
                         app:srcCompat="@drawable/sample" />
@@ -56,6 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
+                        android:textStyle="bold"
                         android:text="by Cheska Roque"
 
                         android:textColor="@color/dirty_white" />

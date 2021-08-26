@@ -113,32 +113,25 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-
-
         postArrayList.add(new Post(
                 R.drawable.sample,
                 "Kimi No Nawa",
-                "Lorem ipsum dolor  eni ut alrum",
-                "5",
-                "Alenna Cayton","romance"));
+                "Beautifully animated (we're talking Studio Ghibli standards here), Your Name captures that sensation of waking up from a dream you wish lasted longer, or misplacing a name that's still warm on your tongue, but has just departed.",
+                "Rating : 4",
+                "Kristen Yoonsoo Kim","romance"));
         postArrayList.add(new Post(
-                R.drawable.pulpfiction,
-                "Pulp Fiction",
-                "Lorem ipsum dolor sit amet,  elit,ialiqua. Ut enim ad minim veniamea commodo consequat. Duis autre eu fugiat nullallit anim id est laborum",
-                "3",
-                "Cheska Mendoza","action"));
+                R.drawable.centi,
+                "5 Centimeters per Second",
+                "This movie blew me away - it was amazing. I can't tell you anything more other than it revolves around love, life and time. This film is stunning you simply must watch it! Don't be put off if you're not interested by the end of the first episode because by the end of the third episode everything comes together in one amazingly beautiful package. If ever a film deserved 10/10 this was it. If you have ever felt love you will adore this movie because it captures that feeling flawlessly.",
+                "Rating : 5",
+                "Jeff Shannon","romance"));
+
         postArrayList.add(new Post(
-                R.drawable.starwars,
-                "Star Wars",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rhoncus eu risus aliquet venenatis. Mauris ipsum mi, convallis eu vestibulum in, venenatis sit amet risus. Duis aliquet mattis enim ac ornare. Nunc blandit nibh lectus, vitae mattis elit blandit ac. Aenean in semper libero, eget finibus lectus. Proin ullamcorper odio sed ex dapibus blandit. Proin gravida cursus felis, sed porttitor purus sollicitudin a. Duis auctor rutrum dictum. In sagittis, sapien vitae posuere vestibulum, augue neque viverra nibh, a cursus eros magna quis elit.",
-                "5",
-                "Cheska Roque","drama"));
-        postArrayList.add(new Post(
-                R.drawable.wandavision,
-                "Wanda Vision",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, truccaecat ct mollit anim id est laborum",
-                "1",
-                "Candy Candy","comedy"));
+                R.drawable.whisper_poster,
+                "Whisper of the Heart",
+                "Shizuku is a fantastic heroine and for all my creatively inclined people, if you haven't seen this movie yet, it'll remind you of the work and honing of craft needed to be great at anything you love. ",
+                "Rating : 5",
+                "Princess Weekes","romance"));
 
 
 
