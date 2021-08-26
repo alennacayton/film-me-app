@@ -10,6 +10,8 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,6 +29,7 @@ public class MovieRecomActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager postLayoutManager;
 
 
+    private ImageButton ibBack;
     private TextView tvGenreHome;
 
 
@@ -79,7 +82,10 @@ public class MovieRecomActivity extends AppCompatActivity {
         });
 
 
+        // initializing components
+        this.ibBack = findViewById(R.id.ib_back_mr);
         this.tvGenreHome = findViewById(R.id.tv_genre_home);
+
 
         if(getIntent()!=null){
             this.tvGenreHome.setText(getIntent().getStringExtra("item"));
@@ -156,6 +162,18 @@ public class MovieRecomActivity extends AppCompatActivity {
         this.postRecyclerView.setAdapter(postAdapter);
         this.postAdapter.notifyDataSetChanged();
 
+
+
+
+        ibBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MovieRecomActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
 

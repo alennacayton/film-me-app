@@ -96,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.nb_logout:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
