@@ -116,7 +116,7 @@
                             tools:layout_editor_absoluteX="0dp" />
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/iv_send_comment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintBottom_toBottomOf="parent"

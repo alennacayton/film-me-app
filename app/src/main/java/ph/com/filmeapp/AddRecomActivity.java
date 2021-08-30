@@ -1,5 +1,8 @@
 package ph.com.filmeapp;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -8,12 +11,14 @@ import androidx.core.content.ContextCompat;
 import java.lang.Object;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,13 +30,18 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,6 +65,10 @@ public class AddRecomActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private String userId;
     private FirebaseUser user;
+
+
+    FirebaseStorage storage;
+    Uri imageUri;
 
 
 
@@ -120,6 +134,8 @@ public class AddRecomActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+               // uploadImage();
+
 
                 String title = etTitle.getText().toString();
                 String description = etDesc.getText().toString();
@@ -137,29 +153,68 @@ public class AddRecomActivity extends AppCompatActivity {
                 String uid = getuid();
 
 
-                Map<String, Object> map = new HashMap<>();
-                map.put("uid", uid);
-                map.put("title", title);
-                map.put("description", description);
-                map.put("genre", genre);
-                map.put("rating", rating);
+
+                if(imageUri != null)
+                {
+                    StorageReference reference = storage.getReference().child("post_images" + UUID.randomUUID().toString());
 
 
-                FirebaseDatabase.getInstance().getReference().child("posts").push()
-                        .setValue(map)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
+                    reference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
 
-                                Toast.makeText(getApplicationContext(), "Succesfully Added", Toast.LENGTH_LONG).show();
+                            if(task.isSuccessful()){
+
+
+                                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+
+
+                                        Map<String, Object> map = new HashMap<>();
+                                        map.put("image", uri.toString());
+                                        map.put("uid", uid);
+                                        map.put("title", title);
+                                        map.put("description", description);
+                                        map.put("genre", genre);
+                                        map.put("rating", rating);
+
+
+                                        FirebaseDatabase.getInstance().getReference().child("posts").push()
+                                                .setValue(map)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+
+                                                        Toast.makeText(getApplicationContext(), "Succesfully Added", Toast.LENGTH_LONG).show();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull @NotNull Exception e) {
+                                                        Toast.makeText(getApplicationContext(), "Could not insert data", Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+
+
+
+                                    }
+                                });
+
+
+
+                            } else{
+
+                                Toast.makeText(AddRecomActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull @NotNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "Could not insert data", Toast.LENGTH_LONG).show();
-                            }
-                        });
+
+
+                        }
+                    });
+
+
+
+                }
 
 
 
@@ -171,7 +226,65 @@ public class AddRecomActivity extends AppCompatActivity {
         });
 
 
+        ibAddPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mGetContent.launch("image/*");
+            }
+        });
+
+
+
+
+
+
+
+
     }
+
+
+    private void uploadImage()
+    {
+        if(imageUri != null)
+        {
+            StorageReference reference = storage.getReference().child("images/*" + UUID.randomUUID().toString());
+
+
+            reference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
+
+                    if(task.isSuccessful()){
+
+                        Toast.makeText(AddRecomActivity.this, "Image Uploaded Succesfully", Toast.LENGTH_SHORT).show();
+                    } else{
+
+                        Toast.makeText(AddRecomActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            });
+
+
+        }
+
+    }
+
+
+
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if(result != null){
+
+                        ibAddPhoto.setImageURI(result);
+                        imageUri = result;
+                    }
+                }
+            });
 
 
 
@@ -180,6 +293,8 @@ public class AddRecomActivity extends AppCompatActivity {
         this.database = FirebaseDatabase.getInstance();
         this.user = this.mAuth.getCurrentUser();
         this.userId = this.user.getUid();
+
+        storage = FirebaseStorage.getInstance();
     }
 
     private void initComponents(){

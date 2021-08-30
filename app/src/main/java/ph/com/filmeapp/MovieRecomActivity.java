@@ -12,10 +12,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,6 +39,16 @@ public class MovieRecomActivity extends AppCompatActivity {
 
     private ImageButton ibBack;
     private TextView tvGenreHome;
+   // private ImageView ivSendComment;
+
+
+    DatabaseReference database;
+
+    private FirebaseAuth mAuth;
+    private String userId;
+    private FirebaseUser user;
+
+
 
 
     @Override
@@ -83,8 +101,60 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
         // initializing components
+        database = FirebaseDatabase.getInstance().getReference("posts");
         this.ibBack = findViewById(R.id.ib_back_mr);
         this.tvGenreHome = findViewById(R.id.tv_genre_home);
+     //   this.ivSendComment = findViewById(R.id.iv_send_comment);
+        initFirebase();
+
+
+
+
+
+
+
+
+
+
+        if(getIntent()!=null){
+            this.tvGenreHome.setText(getIntent().getStringExtra("item"));
+        }
+
+
+        if(getIntent().getStringExtra("item").equals("Romance"))
+        {
+
+            database.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                        Post post = dataSnapshot.getValue(Post.class);
+                        postArrayList.add(new Post( R.drawable.sample, post.getTitle(),post.getDesc(), post.getRating(), "cheska", post.getGenre()));
+
+                    }
+                    postAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+
+
+
+
+
+
+
+
+
+/*
 
 
         if(getIntent()!=null){
@@ -146,6 +216,10 @@ public class MovieRecomActivity extends AppCompatActivity {
         }
 
 
+
+        */
+
+
         // romance : kimi no nawa, 5 centimeters per seocnd , Whisper of the Heart
 
         // sci-fi: star wars, guardians ofthe galaxy, et
@@ -178,17 +252,7 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
 
-
-/*
-        postRecyclerView = findViewById(R.id.rv_posts_home);
-        //postRecyclerView .setHasFixedSize(true);
-        postLayoutManager = new LinearLayoutManager(this);
-        postAdapter = new PostAdapter(postArrayList, MovieRecomActivity.this);
-        postRecyclerView.setLayoutManager(postLayoutManager);
-        postRecyclerView.setAdapter(postAdapter);
-        postAdapter.notifyDataSetChanged();
-*/
-
+        LoadPost();
 
 
 
@@ -196,4 +260,24 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
     }
+
+
+    private void LoadPost()
+    {
+
+    }
+
+    private void initFirebase() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.user = this.mAuth.getCurrentUser();
+        this.userId = this.user.getUid();
+    }
+
+
+
+    private String getuid() {
+        return this.user.getUid();
+    }
+
+
 }
