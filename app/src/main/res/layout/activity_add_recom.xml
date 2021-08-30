@@ -36,7 +36,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                      >
+                        >
 
                         <TextView
                             android:id="@+id/textView5"
@@ -105,10 +105,13 @@
                         android:textColor="@color/gray_card"
                         android:textSize="16dp" />
 
-                    <LinearLayout
+
+                    <RadioGroup
+                        android:id="@+id/rg_rating"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
+
 
                         <RadioButton
                             android:id="@+id/rb_rating1_ar"
@@ -144,7 +147,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="5" />
-                    </LinearLayout>
+
+
+                    </RadioGroup>
+
 
                     <TextView
                         android:id="@+id/textView3"
@@ -157,10 +163,11 @@
                         android:textColor="@color/gray_card"
                         android:textSize="16dp" />
 
-                    <LinearLayout
+                    <RadioGroup
+                        android:id="@+id/rg_genre"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <RadioButton
                             android:id="@+id/rb_romance_ar"
@@ -180,12 +187,6 @@
                             android:layout_height="wrap_content"
                             android:text="Comedy" />
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/rb_drama_ar"
@@ -204,7 +205,7 @@
                             android:layout_width="125dp"
                             android:layout_height="wrap_content"
                             android:text="Thriller/Horror" />
-                    </LinearLayout>
+                    </RadioGroup>
 
 
                 </LinearLayout>

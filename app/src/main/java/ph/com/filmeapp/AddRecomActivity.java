@@ -2,19 +2,63 @@ package ph.com.filmeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.lang.Object;
+import java.util.HashMap;
+import java.util.Map;
+
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
 public class AddRecomActivity extends AppCompatActivity {
+
+
+    private ImageButton ibAddPhoto;
+    private EditText etDesc;
+    private EditText etTitle;
+    private Button btnAddPost;
+
+    private RadioGroup rgRating;
+    private RadioGroup rgGenre;
+
+    private RadioButton rbRating;
+    private RadioButton rbGenre;
+
+    // firebase
+
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private String userId;
+    private FirebaseUser user;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +111,55 @@ public class AddRecomActivity extends AppCompatActivity {
 
 
 
+        initComponents();
+        initFirebase();
+
+
+
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String title = etTitle.getText().toString();
+                String description = etDesc.getText().toString();
+
+                int radioIdGenre = rgGenre.getCheckedRadioButtonId();
+                int radioIdRating = rgRating.getCheckedRadioButtonId();
+
+                rbGenre = findViewById(radioIdGenre);
+                rbRating = findViewById(radioIdRating);
+
+                String genre = rbGenre.getText().toString();
+                String rating = rbRating.getText().toString();
+
+
+                String uid = getuid();
+
+
+                Map<String, Object> map = new HashMap<>();
+                map.put("uid", uid);
+                map.put("title", title);
+                map.put("description", description);
+                map.put("genre", genre);
+                map.put("rating", rating);
+
+
+                FirebaseDatabase.getInstance().getReference().child("posts").push()
+                        .setValue(map)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                                Toast.makeText(getApplicationContext(), "Succesfully Added", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Could not insert data", Toast.LENGTH_LONG).show();
+                            }
+                        });
 
 
 
@@ -74,13 +167,40 @@ public class AddRecomActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
+            }
+        });
 
 
     }
+
+
+
+    private void initFirebase() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.database = FirebaseDatabase.getInstance();
+        this.user = this.mAuth.getCurrentUser();
+        this.userId = this.user.getUid();
+    }
+
+    private void initComponents(){
+
+       ibAddPhoto = findViewById(R.id.ib_upload_ar);
+       etDesc = findViewById(R.id.pt_desc_ar);
+       etTitle = findViewById(R.id.pt_title_ar);
+       btnAddPost = findViewById(R.id.btn_addpost_ar);
+
+       rgGenre = findViewById(R.id.rg_genre);
+       rgRating = findViewById(R.id.rg_rating);
+
+
+    }
+
+
+
+    private String getuid() {
+        return this.user.getUid();
+    }
+
+
+
 }
