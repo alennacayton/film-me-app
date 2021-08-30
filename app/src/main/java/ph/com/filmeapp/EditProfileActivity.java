@@ -1,16 +1,25 @@
 package ph.com.filmeapp;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,8 +27,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class EditProfileActivity extends AppCompatActivity {
     private EditText etname;
@@ -29,12 +45,18 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText etemail;
     private Button btupdate;
     private Button btcancel;
+    private ImageButton ibAvatar;
     private ProgressBar pbUpdate;
 
 
     private FirebaseUser user;
     private FirebaseAuth mAuth;
     private String userId;
+
+
+    FirebaseStorage storage;
+    Uri imageUri;
+
 
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Collections.users.name());
@@ -49,6 +71,19 @@ public class EditProfileActivity extends AppCompatActivity {
         this.initFirebase();
     }
 
+
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if(result != null){
+
+                        ibAvatar.setImageURI(result);
+                        imageUri = result;
+                    }
+                }
+            });
+
     private void initComponents(){
         this.etname = findViewById(R.id.et_name);
         this.etusername = findViewById(R.id.et_username);
@@ -58,11 +93,9 @@ public class EditProfileActivity extends AppCompatActivity {
         this.pbUpdate = findViewById(R.id.pb_update);
         this.btcancel = findViewById(R.id.bt_cancel);
         this.etemail = findViewById(R.id.et_email);
+        this.ibAvatar = findViewById(R.id.et_avatar);
 
         this.initFirebase();
-
-
-
 
 
 
@@ -77,22 +110,72 @@ public class EditProfileActivity extends AppCompatActivity {
                 String password = etpassword.getText().toString();
                 String email = etemail.getText().toString();
 
-                HashMap hashMap = new HashMap();
-                hashMap.put("name", name);
-                hashMap.put("username", username);
-                hashMap.put("description", description);
-                hashMap.put("password", password);
-                hashMap.put("email", email);
 
 
-                etname.setText(name);
+                if(imageUri != null)
+                {
+                    StorageReference storageReference = storage.getReference().child("user_images" + UUID.randomUUID().toString());
 
-                reference.child(getuid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
-                    @Override
-                    public void onSuccess(Object o) {
-                        pbUpdate.setVisibility(View.GONE);
-                    }
-                });
+                    storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
+
+                            if(task.isSuccessful()){
+
+
+                                storageReference .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+
+
+                                        HashMap hashMap = new HashMap();
+                                        hashMap.put("avatar", uri.toString());
+                                        hashMap.put("name", name);
+                                        hashMap.put("username", username);
+                                        hashMap.put("description", description);
+                                        hashMap.put("password", password);
+                                        hashMap.put("email", email);
+
+
+                                        etname.setText(name);
+
+
+                                        reference.child(getuid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                                            @Override
+                                            public void onSuccess(Object o) {
+                                                pbUpdate.setVisibility(View.GONE);
+                                            }
+                                        });
+
+
+                                    }
+                                });
+
+
+
+                            } else{
+
+                                Toast.makeText(EditProfileActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    });
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
             }
         });
 
@@ -109,12 +192,21 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+
+        ibAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGetContent.launch("image/*");
+            }
+        });
+
     }
 
     private void initFirebase(){
         this.mAuth = FirebaseAuth.getInstance();
         this.user = this.mAuth.getCurrentUser();
         this.userId = this.user.getUid();
+        storage = FirebaseStorage.getInstance();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Collections.users.name());
 
