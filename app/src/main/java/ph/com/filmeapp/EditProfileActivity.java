@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -208,6 +209,8 @@ public class EditProfileActivity extends AppCompatActivity {
         reference.child(this.userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String avatar = snapshot.child("avatar").getValue().toString();
+                Picasso.get().load(avatar).into(ibAvatar);
                 String name = snapshot.child("name").getValue().toString();
                 etname.setText(name);
                 String username = snapshot.child("username").getValue().toString();
@@ -218,6 +221,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 etpassword.setText(password);
                 String email = snapshot.child("email").getValue().toString();
                 etemail.setText(email);
+
 
                 pbUpdate.setVisibility(View.GONE);
 
