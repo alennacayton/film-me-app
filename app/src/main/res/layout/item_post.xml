@@ -34,8 +34,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
-                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
 
+                        android:paddingBottom="10dp"
                         android:text="Kimi No Nawa"
                         android:textAlignment="center"
                         android:textColor="@color/dirty_white"
@@ -56,18 +57,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
-                        android:textStyle="bold"
-                        android:text="by Cheska Roque"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
 
-                        android:textColor="@color/dirty_white" />
+                        android:text="by Cheska Roque"
+                        android:textColor="@color/dirty_white"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_rating_mr"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
-                        android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
 
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
                         android:text="Rating : 5"
                         android:textColor="@color/dirty_white" />
 
@@ -77,6 +82,8 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
                         android:justificationMode="inter_word"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="Ut scelerisque ipsum a molestie egestas. Etiam rhoncus accumsan arcu, sed blandit sem bibendum et. Nulla ac nibh dignissim, convallis sem nec, porta erat. Suspendisse pretium, justo bibendum aliquam lacinia, augue erat faucibus lorem, eget consectetur sem felis finibus felis. Mauris consequat nisl quis elementum gravida. Nullam sodales, lectus eu porttitor aliquam, odio orci lacinia diam, id vestibulum nibh ante a tortor. Quisque rutrum ac arcu et vestibulum. Praesent luctus vel "
                         android:textColor="@color/dirty_white" />

@@ -21,6 +21,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -38,7 +39,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -67,6 +73,7 @@ public class AddRecomActivity extends AppCompatActivity {
     private FirebaseUser user;
 
 
+    String mCurrName;
     FirebaseStorage storage;
     Uri imageUri;
 
@@ -174,10 +181,16 @@ public class AddRecomActivity extends AppCompatActivity {
                                         Map<String, Object> map = new HashMap<>();
                                         map.put("image", uri.toString());
                                         map.put("uid", uid);
+                                        map.put("name", mCurrName);
                                         map.put("title", title);
                                         map.put("description", description);
                                         map.put("genre", genre);
                                         map.put("rating", rating);
+
+
+
+
+
 
 
                                         FirebaseDatabase.getInstance().getReference().child("posts").push()
@@ -241,6 +254,30 @@ public class AddRecomActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStart(){
+
+        super.onStart();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference(Collections.users.name());
+
+        userRef.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                        mCurrName = snapshot.child("name").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+
     private void uploadImage()
     {
         if(imageUri != null)
@@ -282,6 +319,10 @@ public class AddRecomActivity extends AppCompatActivity {
                     }
                 }
             });
+
+
+
+
 
 
 

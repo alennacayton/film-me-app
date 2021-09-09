@@ -2,6 +2,7 @@ package ph.com.filmeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +41,7 @@ public class MovieRecomActivity extends AppCompatActivity {
 
     private ImageButton ibBack;
     private TextView tvGenreHome;
+    private ConstraintLayout clBackground;
    // private ImageView ivSendComment;
 
 
@@ -101,9 +104,12 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
         // initializing components
-        database = FirebaseDatabase.getInstance().getReference("posts");
         this.ibBack = findViewById(R.id.ib_back_mr);
         this.tvGenreHome = findViewById(R.id.tv_genre_home);
+        this.clBackground = findViewById(R.id.cl_mr);
+
+
+
      //   this.ivSendComment = findViewById(R.id.iv_send_comment);
         initFirebase();
 
@@ -118,8 +124,22 @@ public class MovieRecomActivity extends AppCompatActivity {
 
         if(getIntent()!=null){
             this.tvGenreHome.setText(getIntent().getStringExtra("item"));
+
+            if(getIntent().getStringExtra("item").equals("Romance"))
+                this.clBackground.setBackgroundColor(getResources().getColor(R.color.pink_card));
+            else if (getIntent().getStringExtra("item").equals("Sci-Fi"))
+                this.clBackground.setBackgroundColor(getResources().getColor(R.color.orange_card));
+            else if (getIntent().getStringExtra("item").equals("Drama"))
+                this.clBackground.setBackgroundColor(getResources().getColor(R.color.blue_card));
+            else if (getIntent().getStringExtra("item").equals("Thriller"))
+                this.clBackground.setBackgroundColor(getResources().getColor(R.color.yellow_card));
+            else if (getIntent().getStringExtra("item").equals("Action"))
+                this.clBackground.setBackgroundColor(getResources().getColor(R.color.green_card));
+            else if (getIntent().getStringExtra("item").equals("Comedy"))
+                this.clBackground.setBackgroundColor(getResources().getColor(R.color.purple_card));
         }
 
+        /*
 
         if(getIntent().getStringExtra("item").equals("Romance"))
         {
@@ -147,6 +167,7 @@ public class MovieRecomActivity extends AppCompatActivity {
         }
 
 
+*/
 
 
 
@@ -156,9 +177,13 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 /*
 
-
         if(getIntent()!=null){
             this.tvGenreHome.setText(getIntent().getStringExtra("item"));
+
+
+
+
+
         }
 
 
@@ -216,8 +241,8 @@ public class MovieRecomActivity extends AppCompatActivity {
         }
 
 
+*/
 
-        */
 
 
         // romance : kimi no nawa, 5 centimeters per seocnd , Whisper of the Heart
@@ -226,15 +251,181 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
 
-        this.postRecyclerView = findViewById(R.id.rv_posts_home);
+        postRecyclerView = findViewById(R.id.rv_posts_home);
+        database = FirebaseDatabase.getInstance().getReference("posts");
+        postRecyclerView.setHasFixedSize(true);
+        postLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false );
+        postRecyclerView.setLayoutManager(postLayoutManager);
+
+        postArrayList = new ArrayList<>();
+
+        postAdapter = new PostAdapter(postArrayList, MovieRecomActivity.this);
+        postRecyclerView.setAdapter(postAdapter);
+
+        //
 
 
-        this.postLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false );
-        this.postRecyclerView.setLayoutManager(postLayoutManager);
 
-        this.postAdapter = new PostAdapter(postArrayList, MovieRecomActivity.this);
-        this.postRecyclerView.setAdapter(postAdapter);
-        this.postAdapter.notifyDataSetChanged();
+
+        if(getIntent().getStringExtra("item").equals("Romance"))
+        {
+            Query query = database.orderByChild("genre").equalTo("Romance");
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                        Post post = dataSnapshot.getValue(Post.class);
+                        postArrayList.add(post);
+                    }
+
+                    postAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }
+
+
+        if(getIntent().getStringExtra("item").equals("Comedy"))
+        {
+            Query query = database.orderByChild("genre").equalTo("Comedy");
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                        Post post = dataSnapshot.getValue(Post.class);
+                        postArrayList.add(post);
+                    }
+
+                    postAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }
+
+
+        if(getIntent().getStringExtra("item").equals("Drama"))
+        {
+            Query query = database.orderByChild("genre").equalTo("Drama");
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                        Post post = dataSnapshot.getValue(Post.class);
+                        postArrayList.add(post);
+                    }
+
+                    postAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }
+
+
+        if(getIntent().getStringExtra("item").equals("Thriller"))
+        {
+            Query query = database.orderByChild("genre").equalTo("Thriller/Horror");
+
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                        Post post = dataSnapshot.getValue(Post.class);
+                        postArrayList.add(post);
+                    }
+
+                    postAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }
+
+
+        if(getIntent().getStringExtra("item").equals("Action"))
+        {
+            Query query = database.orderByChild("genre").equalTo("Action");
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                        Post post = dataSnapshot.getValue(Post.class);
+                        postArrayList.add(post);
+                    }
+
+                    postAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }
+
+
+        if(getIntent().getStringExtra("item").equals("Sci-Fi"))
+        {
+            Query query = database.orderByChild("genre").equalTo("Sci-Fi");
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                        Post post = dataSnapshot.getValue(Post.class);
+                        postArrayList.add(post);
+                    }
+
+                    postAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+
+        }
+
 
 
 
@@ -252,7 +443,7 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
 
-        LoadPost();
+       // LoadPost();
 
 
 
@@ -261,11 +452,14 @@ public class MovieRecomActivity extends AppCompatActivity {
 
     }
 
-
+/*
     private void LoadPost()
     {
 
     }
+
+
+    */
 
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();

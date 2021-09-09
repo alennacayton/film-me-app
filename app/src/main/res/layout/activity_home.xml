@@ -21,21 +21,20 @@
             android:padding = "10dp">
 
 
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="15dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/gray_card"
+
+
                     android:orientation="vertical"
-
-
-                    android:background= "@color/gray_card"
-                    android:padding = "10dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/tv_feature_hp"
@@ -51,7 +50,6 @@
                         android:textStyle="bold" />
 
 
-
                     <ImageView
                         android:id="@+id/iv_img_hp"
                         android:layout_width="match_parent"
@@ -65,6 +63,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
                         android:text="5 Centimeters per Second"
                         android:textColor="@color/dirty_white"
                         android:textSize="20sp"
@@ -75,8 +75,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
-                        android:text="by Jeff Shannon"
+                        android:paddingLeft="12dp"
 
+                        android:text="by Jeff Shannon"
                         android:textColor="@color/dirty_white" />
 
                     <TextView
@@ -84,23 +85,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
-                        android:paddingBottom="10dp"
+                        android:paddingLeft="12dp"
 
-                        android:textColor="@color/dirty_white"
-                        android:text="Rating : 5" />
+                        android:paddingBottom="10dp"
+                        android:text="Rating : 5"
+                        android:textColor="@color/dirty_white" />
 
                     <TextView
                         android:id="@+id/tv_desc_hp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/amethysta"
-                        android:textColor="@color/dirty_white"
                         android:justificationMode="inter_word"
-                        android:paddingBottom="10dp"
+                        android:padding="12dp"
                         android:text="This movie blew me away - it was amazing. I can't tell you anything more other than it revolves around love, life and time. This film is stunning you simply must watch it! Don't be put off if you're not interested by the end of the first episode because by the end of the third episode everything comes together in one amazingly beautiful package. If ever a film deserved 10/10 this was it. If you have ever felt love you will adore this movie because it captures that feeling flawlessly."
 
-                        />
-
+                        android:textColor="@color/dirty_white" />
 
 
                 </LinearLayout>

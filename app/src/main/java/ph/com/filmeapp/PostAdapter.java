@@ -1,19 +1,32 @@
 package ph.com.filmeapp;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     //Context context;
@@ -22,6 +35,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public Context cxt;
     private ArrayList<Post> postArrayList;
 
+
+
+    DatabaseReference commentRef;
+
+    private FirebaseAuth mAuth;
+    private String userId;
+    private FirebaseUser user;
 
 
 
@@ -69,11 +89,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
        // holder.tvGenre.setText(currentItem.getGenre());
-        holder.ivPoster.setImageResource(currentItem.getImageId());
-        holder.tvDesc.setText(currentItem.getDesc());
+
+
+        Picasso.get().load(currentItem.getImage()).into(holder.ivPoster);
+        holder.tvDesc.setText(currentItem.getDescription());
         holder.tvName.setText(currentItem.getName());
         holder.tvTitle.setText(currentItem.getTitle());
         holder.tvRating.setText(currentItem.getRating());
+
+
+
+
+        holder.ivSendComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String comment = holder.etComment.getText().toString();
+                String uid = getuid();
+                //get user id avatar
+
+                
+            }
+        });
+
+
+
 
         ArrayList<Comment> arrayList = new ArrayList<>();
 
@@ -155,6 +195,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
 
+    /*
+
+    private void addComment(PostViewHolder holder, String postKey, DatabaseReference commentRef, String uid, String comment)
+    {
+        HashMap hm = new HashMap();
+        hm.put("name", )
+
+    }
+
+
+    */
+
     @Override
     public int getItemCount() {
         return postArrayList.size();
@@ -172,7 +224,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public TextView tvRating;
         public TextView tvName;
         public RecyclerView commentRecyclerView;
-
+        private ImageView ivSendComment;
+        private EditText etComment;
 
 
         public PostViewHolder(@NonNull @NotNull View itemView) {
@@ -185,9 +238,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             this.tvName = itemView.findViewById(R.id.tv_name_mr);
             this.commentRecyclerView = itemView.findViewById(R.id.rv_feedbacks_mr);
 
+            this.ivSendComment = itemView.findViewById(R.id.iv_send_comment);
+            this.etComment = itemView.findViewById(R.id.pv_comment_mr);
+
 
         }
     }
+
+
+
+    private void initFirebase() {
+        this.mAuth = FirebaseAuth.getInstance();
+        this.user = this.mAuth.getCurrentUser();
+
+        this.commentRef = FirebaseDatabase.getInstance().getReference("comments");
+        this.userId = this.user.getUid();
+    }
+
+
+
+    private String getuid() {
+        return this.user.getUid();
+    }
+
+
+
+
 
 
 }

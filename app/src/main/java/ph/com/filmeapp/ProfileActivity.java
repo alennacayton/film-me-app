@@ -110,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
         this.initFirebase();
 
 
-
+/*
 
 
         postArrayList.add(new Post(
@@ -133,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity {
                 "Rating : 5",
                 "Princess Weekes","romance"));
 
-
+*/
 
         this.postLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false );
         this.rvPosts.setLayoutManager(postLayoutManager);
@@ -175,6 +175,8 @@ public class ProfileActivity extends AppCompatActivity {
         this.userId = this.user.getUid();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Collections.users.name());
+
+
 
         this.pbProfile.setVisibility(View.VISIBLE);
         reference.child(this.userId).addValueEventListener(new ValueEventListener() {
