@@ -119,7 +119,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
 
-        if(postArrayList.get(position).getTitle().equals("Kimi No Nawa")){
+        /*if(postArrayList.get(position).getTitle().equals("Kimi No Nawa")){
 
             arrayList.add(new Comment(R.drawable.user, "Bob Mondello", "It's both gorgeous enough and emotionally engaging enough to be worth seeking out." ));
         }
@@ -182,7 +182,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         if(postArrayList.get(position).getTitle().equals("Star Wars")){
 
             arrayList.add(new Comment(R.drawable.ic_icon, "David Stratton", "I think it is visually exciting. I think there are wonderful things in it but I just missed that innocence of the early films." ));
-        }
+        } */
 
 
 
