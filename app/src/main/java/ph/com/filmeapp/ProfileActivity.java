@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-
+    DatabaseReference database;
 
 
     private FirebaseUser user;
@@ -110,30 +111,36 @@ public class ProfileActivity extends AppCompatActivity {
         this.initFirebase();
 
 
-/*
+
+        database = FirebaseDatabase.getInstance().getReference("posts");
 
 
-        postArrayList.add(new Post(
-                R.drawable.sample,
-                "Kimi No Nawa",
-                "Beautifully animated (we're talking Studio Ghibli standards here), Your Name captures that sensation of waking up from a dream you wish lasted longer, or misplacing a name that's still warm on your tongue, but has just departed.",
-                "Rating : 4",
-                "Kristen Yoonsoo Kim","romance"));
-        postArrayList.add(new Post(
-                R.drawable.centi,
-                "5 Centimeters per Second",
-                "This movie blew me away - it was amazing. I can't tell you anything more other than it revolves around love, life and time. This film is stunning you simply must watch it! Don't be put off if you're not interested by the end of the first episode because by the end of the third episode everything comes together in one amazingly beautiful package. If ever a film deserved 10/10 this was it. If you have ever felt love you will adore this movie because it captures that feeling flawlessly.",
-                "Rating : 5",
-                "Jeff Shannon","romance"));
+        Query query = database.orderByChild("uid").equalTo(userId);
 
-        postArrayList.add(new Post(
-                R.drawable.whisper_poster,
-                "Whisper of the Heart",
-                "Shizuku is a fantastic heroine and for all my creatively inclined people, if you haven't seen this movie yet, it'll remind you of the work and honing of craft needed to be great at anything you love. ",
-                "Rating : 5",
-                "Princess Weekes","romance"));
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
-*/
+                    Post post = dataSnapshot.getValue(Post.class);
+                    postArrayList.add(post);
+                }
+
+                postAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
+
 
         this.postLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false );
         this.rvPosts.setLayoutManager(postLayoutManager);
