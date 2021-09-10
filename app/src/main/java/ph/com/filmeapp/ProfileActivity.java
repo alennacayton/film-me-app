@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private ImageView ivpic;
     private TextView tvname;
     private TextView tvusername;
     private TextView tvdescription;
@@ -158,6 +161,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initComponents(){
+        this.ivpic = findViewById(R.id.iv_profile_picture);
         this.tvname = findViewById(R.id.tv_profile_name);
         this.tvusername = findViewById(R.id.tv_profile_username);
         this.tvdescription = findViewById(R.id.tv_profile_description);
@@ -189,13 +193,15 @@ public class ProfileActivity extends AppCompatActivity {
         reference.child(this.userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Picasso.get().load(currentItem.getImage()).into(ivpic);
                 String name = snapshot.child("name").getValue().toString();
                 tvname.setText(name);
                 String username = snapshot.child("username").getValue().toString();
                 tvusername.setText(username);
 
 
-
+                String avatar = snapshot.child("avatar").getValue().toString();
+                Picasso.get().load(avatar).into(ivpic);
 
                 String description = snapshot.child("description").getValue().toString();
                 tvdescription.setText(description);
