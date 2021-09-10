@@ -187,13 +187,41 @@ public class AddRecomActivity extends AppCompatActivity {
                                         map.put("genre", genre);
                                         map.put("rating", rating);
 
+//
+//                                        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+//                                            @Override
+//                                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//
+//                                                String posts = snapshot.getKey();
+//                                                String ref = FirebaseDatabase.getInstance().getReference() + posts;
+//                                                Toast.makeText(getApplicationContext(), ref, Toast.LENGTH_LONG).show();
+//                                                for(DataSnapshot ds: snapshot.getChildren())
+//                                                {
+//                                                    int index = (int) (ds.getChildrenCount()) + 1;
+//                                                    Toast.makeText(getApplicationContext(), String.valueOf(ds.getChildrenCount()), Toast.LENGTH_LONG).show();
+//
+//                                                }
+//
+//
+//
+//
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//                                            }
+//                                        });
+
+                                        String key = FirebaseDatabase.getInstance().getReference().child("posts").push().getKey();
 
 
+                                        map.put("postID", key);
 
-
-
-
-                                        FirebaseDatabase.getInstance().getReference().child("posts").push()
+                                        Toast.makeText(getApplicationContext(), key, Toast.LENGTH_LONG).show();
+//                                        FirebaseDatabase.getInstance().getReference().child("posts").push()
+                                        FirebaseDatabase.getInstance().getReference().child("posts").child(key)
                                                 .setValue(map)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
@@ -243,8 +271,6 @@ public class AddRecomActivity extends AppCompatActivity {
                 mGetContent.launch("image/*");
             }
         });
-
-
 
 
 
