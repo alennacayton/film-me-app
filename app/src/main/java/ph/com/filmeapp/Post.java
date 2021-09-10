@@ -6,7 +6,7 @@ public class Post {
 
 
 
-    private String description, genre, image, rating, title, uid, name;
+    private String description, genre, image, rating, title, uid, name, postID;
 
 
 
@@ -15,7 +15,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String description, String genre, String image, String rating, String title, String uid, String name) {
+    public Post(String description, String genre, String image, String rating, String title, String uid, String name, String postID) {
         this.description = description;
         this.genre = genre;
         this.image = image;
@@ -23,6 +23,7 @@ public class Post {
         this.title = title;
         this.uid = uid;
         this.name = name;
+        this.postID = postID;
     }
 
     public String getDescription() {
@@ -74,10 +75,18 @@ public class Post {
     }
 
     public String getName() {
-        return uid;
+        return name;
     }
 
-    public void setName(String uid) {
+    public void setName(String name) {
         this.uid = uid;
+    }
+
+    public String getPostId() {
+        return postID;
+    }
+
+    public void setPostId(String postId) {
+        this.postID = postId;
     }
 }

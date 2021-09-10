@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -57,10 +59,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     public void onBindViewHolder(@NonNull @NotNull CommentViewHolder holder, int position) {
 
         Comment currentItem = commentArrayList.get(position);
-
-        holder.ivAvatar.setImageResource(currentItem.getAvatarId());
+        Picasso.get().load(currentItem.getAvatarId()).into(holder.ivAvatar);
         holder.tvName.setText(currentItem.getName());
-        holder.tvDesc.setText(currentItem.getDesc());
+        holder.tvDesc.setText(currentItem.getComment());
+        holder.setIsRecyclable(false);
 
     }
 

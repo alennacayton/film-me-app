@@ -2,6 +2,8 @@ package ph.com.filmeapp;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +16,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,29 +37,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-    //Context context;
 
-    //ArrayList<>
     public Context cxt;
     private ArrayList<Post> postArrayList;
 
 
-
-    DatabaseReference commentRef;
+    DatabaseReference commentRef, postRef, userRef;
 
     private FirebaseAuth mAuth;
     private String userId;
     private FirebaseUser user;
-
-
-
+    String mCurrName, profileImageUrlV;
 
 
     public PostAdapter(ArrayList<Post> postArrayList ,Context mContext){
         this.cxt = mContext;
         this.postArrayList = postArrayList;
-    }
 
+
+    }
 
 
 
@@ -59,16 +63,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @NotNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        // Inflating item_post.xml
-/*
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_post, parent, false);
-
-        PostAdapter.PostViewHolder postViewHolder = new PostAdapter.PostViewHolder(view);
-
-        // return custom ViewHolder
-        return postViewHolder;
-        */
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
         return new PostViewHolder(view);
@@ -77,18 +71,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     }
 
+
+
+
+
+
     @Override
     public void onBindViewHolder(@NonNull @NotNull PostViewHolder holder, int position) {
 
 
         Post currentItem = postArrayList.get(position);
 
+      //  final String postKey = getRef(position).getKey();
+
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(cxt, LinearLayoutManager.VERTICAL, false);
         holder.commentRecyclerView.setLayoutManager(layoutManager);
-    //    holder.commentRecyclerView.setHasFixedSize(true);
-
-
-       // holder.tvGenre.setText(currentItem.getGenre());
 
 
         Picasso.get().load(currentItem.getImage()).into(holder.ivPoster);
@@ -98,6 +96,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.tvRating.setText(currentItem.getRating());
 
 
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference(Collections.users.name());
+
+        userRef.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    mCurrName = snapshot.child("name").getValue().toString();
+                    profileImageUrlV = snapshot.child("avatar").getValue().toString();
+
+                    // Toast.makeText(cxt, mCurrName, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
 
 
         holder.ivSendComment.setOnClickListener(new View.OnClickListener() {
@@ -105,14 +127,59 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             public void onClick(View v) {
 
                 String comment = holder.etComment.getText().toString();
-                String uid = getuid();
-                //get user id avatar
+                String postKey = currentItem.getPostId().toString();
 
-                
+
+              //  Toast.makeText(cxt, currentItem.getTitle(), Toast.LENGTH_SHORT).show();
+
+                if (comment.isEmpty())
+                {
+                    Toast.makeText(cxt, "Please enter a comment!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+
+
+
+
+                    //Toast.makeText(cxt, "is it enteering here hello!", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(cxt,mCurrName, Toast.LENGTH_SHORT).show();
+
+
+                    HashMap hm = new HashMap();
+                    hm.put("comment", comment);
+                    hm.put("postId", postKey);
+                    hm.put("name", mCurrName);
+                    hm.put("avatarId",profileImageUrlV);
+
+                    Toast.makeText(cxt, mCurrName, Toast.LENGTH_LONG).show();
+
+
+
+                    FirebaseDatabase.getInstance().getReference().child("comments").push()
+                            .setValue(hm)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                    Toast.makeText(cxt, "Succesfully Added Comment", Toast.LENGTH_LONG).show();
+                                    notifyDataSetChanged();
+                                    holder.etComment.setText(null);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull @NotNull Exception e) {
+                                    Toast.makeText(cxt, "Could not insert comment", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+
+
+                  //  addComment(holder, postKey, commentRef, user.getUid(), comment);
+                }
             }
         });
-
-
 
 
         ArrayList<Comment> arrayList = new ArrayList<>();
@@ -192,20 +259,38 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         CommentAdapter commentAdapter = new CommentAdapter(arrayList,holder.commentRecyclerView.getContext());
         holder.commentRecyclerView.setAdapter(commentAdapter);
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("comments");
+
+
+        Query query = database.orderByChild("postId").equalTo(currentItem.getPostId().toString());
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                    Comment comment = dataSnapshot.getValue(Comment.class);
+                    arrayList.add(comment);
+                }
+
+                commentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+        //  commentAdapter.notifyDataSetChanged();
+
     }
 
 
-    /*
-
-    private void addComment(PostViewHolder holder, String postKey, DatabaseReference commentRef, String uid, String comment)
-    {
-        HashMap hm = new HashMap();
-        hm.put("name", )
-
-    }
-
-
-    */
 
     @Override
     public int getItemCount() {
@@ -247,13 +332,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
 
-    private void initFirebase() {
-        this.mAuth = FirebaseAuth.getInstance();
-        this.user = this.mAuth.getCurrentUser();
-
-        this.commentRef = FirebaseDatabase.getInstance().getReference("comments");
-        this.userId = this.user.getUid();
-    }
 
 
 

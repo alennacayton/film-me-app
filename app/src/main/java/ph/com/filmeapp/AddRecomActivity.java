@@ -73,7 +73,7 @@ public class AddRecomActivity extends AppCompatActivity {
     private FirebaseUser user;
 
 
-    String mCurrName;
+    public static String mCurrName;
     FirebaseStorage storage;
     Uri imageUri;
 

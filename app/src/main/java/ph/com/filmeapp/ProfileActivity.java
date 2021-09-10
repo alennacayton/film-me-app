@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
 

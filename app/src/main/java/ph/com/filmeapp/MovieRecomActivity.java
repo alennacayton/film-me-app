@@ -267,6 +267,7 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
 
+
         if(getIntent().getStringExtra("item").equals("Romance"))
         {
             Query query = database.orderByChild("genre").equalTo("Romance");
