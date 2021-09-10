@@ -48,6 +48,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button btcancel;
     private ImageButton ibAvatar;
     private ProgressBar pbUpdate;
+    String avatar_pic;
 
 
     private FirebaseUser user;
@@ -131,6 +132,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                                         HashMap hashMap = new HashMap();
                                         hashMap.put("avatar", uri.toString());
+                                        Toast.makeText(EditProfileActivity.this, uri.toString(), Toast.LENGTH_SHORT).show();
                                         hashMap.put("name", name);
                                         hashMap.put("username", username);
                                         hashMap.put("description", description);
@@ -138,7 +140,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                         hashMap.put("email", email);
 
 
-                                        etname.setText(name);
+                                        //etname.setText(name);
 
 
                                         reference.child(getuid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
@@ -166,14 +168,27 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 }
 
+                HashMap hashMap = new HashMap();
+                //hashMap.put("avatar", avatar_pic.toString());
+                //Toast.makeText(EditProfileActivity.this, avatar, Toast.LENGTH_SHORT).show();
+                hashMap.put("name", name);
+                hashMap.put("username", username);
+                hashMap.put("description", description);
+                hashMap.put("password", password);
+                hashMap.put("email", email);
 
+                reference.child(getuid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        pbUpdate.setVisibility(View.GONE);
+                    }
+                });
                 Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
 
             }
         });
-
 
 
 
@@ -209,8 +224,8 @@ public class EditProfileActivity extends AppCompatActivity {
         reference.child(this.userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String avatar = snapshot.child("avatar").getValue().toString();
-                Picasso.get().load(avatar).into(ibAvatar);
+                avatar_pic = snapshot.child("avatar").getValue().toString();
+                Picasso.get().load(avatar_pic).into(ibAvatar);
                 String name = snapshot.child("name").getValue().toString();
                 etname.setText(name);
                 String username = snapshot.child("username").getValue().toString();
