@@ -79,7 +79,7 @@ public class Post {
     }
 
     public void setName(String name) {
-        this.uid = uid;
+        this.name =  name;
     }
 
     public String getPostId() {

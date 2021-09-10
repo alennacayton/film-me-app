@@ -95,6 +95,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.tvTitle.setText(currentItem.getTitle());
         holder.tvRating.setText(currentItem.getRating());
 
+       Toast.makeText(cxt, currentItem.getTitle(), Toast.LENGTH_LONG).show();
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -120,8 +121,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
 
 
-
-
         holder.ivSendComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,13 +136,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     Toast.makeText(cxt, "Please enter a comment!", Toast.LENGTH_SHORT).show();
                 }
                 else{
-
-
-
-
-                    //Toast.makeText(cxt, "is it enteering here hello!", Toast.LENGTH_SHORT).show();
-
-                    Toast.makeText(cxt,mCurrName, Toast.LENGTH_SHORT).show();
 
 
                     HashMap hm = new HashMap();
@@ -183,75 +175,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
         ArrayList<Comment> arrayList = new ArrayList<>();
-
-
-
-        /*if(postArrayList.get(position).getTitle().equals("Kimi No Nawa")){
-
-            arrayList.add(new Comment(R.drawable.user, "Bob Mondello", "It's both gorgeous enough and emotionally engaging enough to be worth seeking out." ));
-        }
-
-
-        if(postArrayList.get(position).getTitle().equals("Kimi No Nawa")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Alix Turner", "Japanese animated fantasy; humorous, romantic, captivating and utterly beautiful. " ));
-        }
-
-
-        if(postArrayList.get(position).getTitle().equals("5 Centimeters per Second")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Ronnie Scheib", "Just a perfect piece of work" ));
-        }
-
-
-        if(postArrayList.get(position).getTitle().equals("Whisper of the Heart")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Charles Solomon", "If there's a Ghibli film that is under-appreciated, it's this one." ));
-        }
-
-        if(postArrayList.get(position).getTitle().equals("Whisper of the Heart")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Felix Vasquez Jr.", "Will translate more towards girls than boys in the long run… " ));
-        }
-
-        if(postArrayList.get(position).getTitle().equals("Whisper of the Heart")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Jeffrey M. Anderson", "Enchanting." ));
-        }
-
-        if(postArrayList.get(position).getTitle().equals("Guardians of the Galaxy")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Lisa Wright", "The big screen version of this lesser-known Marvel comic is a hilarious curveball." ));
-        }
-
-
-        if(postArrayList.get(position).getTitle().equals("E.T.")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Danielle Solzman", "E.T. the Extra-Terrestrial is one of the greatest films ever made." ));
-        }
-
-        if(postArrayList.get(position).getTitle().equals("E.T.")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Mike Massie", "A family-friendly, heartwarming science-fiction adventure, full of iconic sequences." ));
-        }
-
-
-
-
-
-
-
-        if(postArrayList.get(position).getTitle().equals("Star Wars")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "Evan Williams", "The special effects, of course, are incomparably good and the digital photography achieves a dazzling clarity." ));
-        }
-
-        if(postArrayList.get(position).getTitle().equals("Star Wars")){
-
-            arrayList.add(new Comment(R.drawable.ic_icon, "David Stratton", "I think it is visually exciting. I think there are wonderful things in it but I just missed that innocence of the early films." ));
-        } */
-
-
 
 
 
