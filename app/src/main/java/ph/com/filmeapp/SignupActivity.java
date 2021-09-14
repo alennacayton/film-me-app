@@ -1,26 +1,37 @@
 package ph.com.filmeapp;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.UUID;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -30,12 +41,17 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private EditText etDescription;
+    private ImageView ivAvatar;
     private Button btnSignup;
     private ProgressBar pbSignup;
+    Uri uri;
+    FirebaseStorage storage;
+    String imageAvatar;
+
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
-   // private DatabaseReference reference;
+    // private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +59,19 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
 
+
+
         this.initFirebase();
         this.initComponents();
+
 
     }
 
     private void initFirebase() {
         this.mAuth = FirebaseAuth.getInstance();
         this.database = FirebaseDatabase.getInstance();
+
+        storage = FirebaseStorage.getInstance();
     }
 
     private void initComponents() {
@@ -62,6 +83,16 @@ public class SignupActivity extends AppCompatActivity {
         this.btnSignup = findViewById(R.id.btn_signup_su);
         this.pbSignup = findViewById(R.id.pb_signup);
         this.etDescription = findViewById(R.id.et_su_description);
+        this.ivAvatar = findViewById(R.id.avatar_signup);
+
+        this.ivAvatar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                mGetContent.launch("image/*");
+                System.out.println(imageAvatar );
+            }
+        });
 
         this.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,20 +106,42 @@ public class SignupActivity extends AppCompatActivity {
         this.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
+
+
                 String email = etEmail.getText().toString().trim();
                 String password =  etPassword.getText().toString().trim();
                 String name =  etName.getText().toString().trim();
                 String username =  etUsername.getText().toString().trim();
                 String description =  etDescription.getText().toString().trim();
+                String avatar = imageAvatar;
 
+                if (uri != null) {
+                    StorageReference reference = storage.getReference().child("avatar" + UUID.randomUUID().toString());
+                    reference.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        imageAvatar = uri.toString();
+                                    }
+                                });
+                            }else {
+                                Toast.makeText(SignupActivity.this, "Image Uploaded Unsuccessful", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
 
 
                 //initFirebase();
-                if(!checkEmpty(email, password, name,username)) {
+                if(!checkEmpty(email, password, name,username, imageAvatar)) {
                     // do something
                     //add user to db
 
-                    User user = new User(email, password, name, username, description);
+                    User user = new User(email, password, name, username, description, imageAvatar);
                     storeUser(user);
                 }
             }
@@ -96,7 +149,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    private boolean checkEmpty (String email, String password, String name, String username) {
+    private boolean checkEmpty (String email, String password, String name, String username, String avatar) {
         boolean isEmpty = false;
         if(email.isEmpty()) {
             this.etEmail.setError("Required");
@@ -114,6 +167,10 @@ public class SignupActivity extends AppCompatActivity {
             this.etUsername.setError("Required");
             this.etUsername.requestFocus();
             isEmpty = true;
+        } else if (avatar == null) {
+            Toast.makeText(SignupActivity.this, "Please Upload Avatar", Toast.LENGTH_SHORT).show();
+            this.ivAvatar.requestFocus();
+            isEmpty = true;
         }
 
         return isEmpty;
@@ -122,27 +179,27 @@ public class SignupActivity extends AppCompatActivity {
     public void storeUser (User user) {
         this.pbSignup.setVisibility(View.VISIBLE);
         this.mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()) {
-                        database.getReference(Collections.users.name()).child(mAuth.getCurrentUser().getUid()).setValue(user)
-                             .addOnCompleteListener(new OnCompleteListener<Void> () {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            database.getReference(Collections.users.name()).child(mAuth.getCurrentUser().getUid()).setValue(user)
+                                    .addOnCompleteListener(new OnCompleteListener<Void> () {
 
-                                 @Override
-                                 public void onComplete(@NonNull Task<Void> task) {
-                                     if (task.isSuccessful()){
-                                         signupSuccessful();
-                                     } else {
-                                         signupUnsuccessful();
-                                     }
-                                 }
-                             });
-                    } else {
-                        signupUnsuccessful();
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                signupSuccessful();
+                                            } else {
+                                                signupUnsuccessful();
+                                            }
+                                        }
+                                    });
+                        } else {
+                            signupUnsuccessful();
+                        }
                     }
-                }
-        });
+                });
     }
 
     private void signupUnsuccessful () {
@@ -158,4 +215,16 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if(result != null){
+
+                        ivAvatar.setImageURI(result);
+                        uri = result;
+                    }
+                }
+            });
 }

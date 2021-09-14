@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar pblogin;
 
     private FirebaseAuth mAuth;
+    private SharedPreferences sp;
+    public static Boolean online;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +43,22 @@ public class MainActivity extends AppCompatActivity {
         this.pblogin = findViewById(R.id.pb_login);
 
 
+        //HomeActivity.logout = true;
+
         // button listeners
         this.initFireBase();
+
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = etemail.getText().toString().trim();
                 String password = etpassword.getText().toString().trim();
-                signIn(email, password);
+
+                if (!checkEmpty(email, password)){
+                    signIn(email, password);
+                }
+
             }
         });
 
@@ -55,10 +68,27 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(intent);
+                MainActivity.online = true;
                 finish();
             }
         });
 
+        retrieveData();
+    }
+
+    private boolean checkEmpty (String email, String password) {
+        boolean isEmpty = false;
+        if(email.isEmpty()) {
+            this.etemail.setError("Required");
+            this.etemail.requestFocus();
+            isEmpty = true;
+        } else if (password.isEmpty()) {
+            this.etpassword.setError("Required");
+            this.etpassword.requestFocus();
+            isEmpty = true;
+        }
+
+        return isEmpty;
     }
 
     private void initFireBase() {
@@ -71,10 +101,14 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        boolean online;
+
                         if (task.isSuccessful()) {
                             loginSuccessful();
+
                         }else {
                             loginUnsuccessful ();
+
                         }
                     }
                 });
@@ -83,14 +117,35 @@ public class MainActivity extends AppCompatActivity {
     private void loginUnsuccessful () {
         this.pblogin.setVisibility(View.GONE);
         Toast.makeText(this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+
     }
 
     private void loginSuccessful() {
         this.pblogin.setVisibility(View.GONE);
         Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-
+        MainActivity.online = true;
         Intent i = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(i);
         finish();
     }
+
+    /*protected void onResume() {
+        super.onResume();
+        if (HomeActivity.logout == false)
+        {
+            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
+    }*/
+
+    private void retrieveData() {
+        this.sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+    }
+
+
+
+
+
 }

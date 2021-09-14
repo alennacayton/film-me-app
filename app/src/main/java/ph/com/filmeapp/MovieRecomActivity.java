@@ -474,5 +474,16 @@ public class MovieRecomActivity extends AppCompatActivity {
         return this.user.getUid();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //status to add
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //status to add
+    }
 
 }

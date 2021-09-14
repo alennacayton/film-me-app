@@ -136,7 +136,6 @@ public class AddRecomActivity extends AppCompatActivity {
         initFirebase();
 
 
-
         btnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,7 +158,7 @@ public class AddRecomActivity extends AppCompatActivity {
 
                 String uid = getuid();
 
-
+                checkEmpty(title,description,genre,rating);
 
                 if(imageUri != null)
                 {
@@ -246,6 +245,7 @@ public class AddRecomActivity extends AppCompatActivity {
 
                             } else{
 
+                                //checkEmpty(title,description,genre,rating);
                                 Toast.makeText(AddRecomActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
 
@@ -258,9 +258,12 @@ public class AddRecomActivity extends AppCompatActivity {
                 }
 
 
-
+                Intent intent = new Intent(AddRecomActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
 
             }
+
         });
 
 
@@ -276,10 +279,30 @@ public class AddRecomActivity extends AppCompatActivity {
 
 
 
-
     }
 
+    private boolean checkEmpty (String title, String description, String genre, String rating) {
+        boolean isEmpty = false;
+        if(title.isEmpty()) {
+            this.etTitle.setError("Required");
+            this.etTitle.requestFocus();
+            isEmpty = true;
+        } else if (description.isEmpty()) {
+            this.etDesc.setError("Required");
+            this.etDesc.requestFocus();
+            isEmpty = true;
+        }  else if (genre.isEmpty()) {
+            this.rbGenre.setError("Required");
+            this.rbGenre.requestFocus();
+            isEmpty = true;
+        } else if (rating.isEmpty()) {
+            this.rbRating.setError("Required");
+            this.rbRating.requestFocus();
+            isEmpty = true;
+        }
 
+        return isEmpty;
+    }
     @Override
     protected void onStart(){
 
@@ -302,6 +325,8 @@ public class AddRecomActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
     private void uploadImage()
@@ -380,6 +405,17 @@ public class AddRecomActivity extends AppCompatActivity {
         return this.user.getUid();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //status to add
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //status to add
+    }
 
 
 }

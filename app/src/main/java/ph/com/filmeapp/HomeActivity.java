@@ -160,6 +160,17 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //status to add
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //status to add
+    }
 
 }

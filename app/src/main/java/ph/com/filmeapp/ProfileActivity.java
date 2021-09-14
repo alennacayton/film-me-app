@@ -211,6 +211,8 @@ public class ProfileActivity extends AppCompatActivity {
                     getDescription().setVisibility(View.VISIBLE);
                 }
 
+                //if (avatar != )
+
                 pbProfile.setVisibility(View.GONE);
 
 
@@ -230,5 +232,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView getDescription() {
         return this.tvdescription;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //status to add
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //status to add
     }
 }
