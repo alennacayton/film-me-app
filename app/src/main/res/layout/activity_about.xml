@@ -102,7 +102,7 @@
                             android:id="@+id/imageView3"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
-                            app:srcCompat="@drawable/myimage" />
+                            app:srcCompat="@drawable/alenna" />
 
                     <LinearLayout
                                 android:layout_width="wrap_content"
@@ -143,7 +143,7 @@
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:id="@+id/imageView4"
-                        app:srcCompat="@drawable/myimage"/>
+                        app:srcCompat="@drawable/cheskam"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -182,7 +182,7 @@
                             android:layout_width="150dp"
                             android:layout_height="150dp"
                             android:id="@+id/imageView5"
-                            app:srcCompat="@drawable/myimage"/>
+                            app:srcCompat="@drawable/cheskar"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
