@@ -41,7 +41,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private EditText etDescription;
-    private ImageView ivAvatar;
     private Button btnSignup;
     private ProgressBar pbSignup;
     Uri uri;
@@ -57,9 +56,6 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
-
-
 
         this.initFirebase();
         this.initComponents();
@@ -83,16 +79,10 @@ public class SignupActivity extends AppCompatActivity {
         this.btnSignup = findViewById(R.id.btn_signup_su);
         this.pbSignup = findViewById(R.id.pb_signup);
         this.etDescription = findViewById(R.id.et_su_description);
-        this.ivAvatar = findViewById(R.id.avatar_signup);
 
-        this.ivAvatar.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                mGetContent.launch("image/*");
-                System.out.println(imageAvatar );
-            }
-        });
+        imageAvatar = "https://firebasestorage.googleapis.com/v0/b/feed-me-app-6d735.appspot.com/o/woman-avatar-profile-vector-21372067.jpg?alt=media&token=486395a7-6de1-4d4a-808e-a270c9da7a36";
+
 
         this.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,25 +105,8 @@ public class SignupActivity extends AppCompatActivity {
                 String description =  etDescription.getText().toString().trim();
                 String avatar = imageAvatar;
 
-                if (uri != null) {
-                    StorageReference reference = storage.getReference().child("avatar" + UUID.randomUUID().toString());
-                    reference.putFile(uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
 
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        imageAvatar = uri.toString();
-                                    }
-                                });
-                            }else {
-                                Toast.makeText(SignupActivity.this, "Image Uploaded Unsuccessful", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
+
 
 
                 //initFirebase();
@@ -147,6 +120,20 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+/*
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if(result != null){
+
+                        ivAvatar.setImageURI(result);
+                        uri = result;
+                    }
+                }
+            });
+
+*/
 
 
     private boolean checkEmpty (String email, String password, String name, String username, String avatar) {
@@ -167,12 +154,14 @@ public class SignupActivity extends AppCompatActivity {
             this.etUsername.setError("Required");
             this.etUsername.requestFocus();
             isEmpty = true;
-        } else if (avatar == null) {
+        }
+
+        /*else if (avatar == null) {
             Toast.makeText(SignupActivity.this, "Please Upload Avatar", Toast.LENGTH_SHORT).show();
             this.ivAvatar.requestFocus();
             isEmpty = true;
         }
-
+*/
         return isEmpty;
     }
 
@@ -216,15 +205,5 @@ public class SignupActivity extends AppCompatActivity {
         finish();
     }
 
-    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
-            new ActivityResultCallback<Uri>() {
-                @Override
-                public void onActivityResult(Uri result) {
-                    if(result != null){
 
-                        ivAvatar.setImageURI(result);
-                        uri = result;
-                    }
-                }
-            });
 }
