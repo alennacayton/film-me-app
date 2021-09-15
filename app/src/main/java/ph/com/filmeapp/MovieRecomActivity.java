@@ -88,6 +88,7 @@ public class MovieRecomActivity extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.nb_logout:
+                        FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;

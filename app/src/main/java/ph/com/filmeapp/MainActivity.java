@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,8 +46,27 @@ public class MainActivity extends AppCompatActivity {
 
         //HomeActivity.logout = true;
 
+
         // button listeners
         this.initFireBase();
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null) {
+
+//put intent to go to mainActivity
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+
+
+            this.finish();
+
+        }
+
+
+
+
 
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        retrieveData();
+       // retrieveData();
     }
 
     private boolean checkEmpty (String email, String password) {
