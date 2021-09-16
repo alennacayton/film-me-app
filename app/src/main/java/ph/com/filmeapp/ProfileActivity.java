@@ -118,8 +118,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         database = FirebaseDatabase.getInstance().getReference("posts");
-
-
         Query query = database.orderByChild("uid").equalTo(userId);
 
         query.addValueEventListener(new ValueEventListener() {
@@ -144,17 +142,12 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-
-
-
         this.postLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false );
         this.rvPosts.setLayoutManager(postLayoutManager);
 
         this.postAdapter = new PostAdapter(postArrayList, ProfileActivity.this);
         this.rvPosts.setAdapter(postAdapter);
         this.postAdapter.notifyDataSetChanged();
-
-
 
 
 
@@ -195,12 +188,12 @@ public class ProfileActivity extends AppCompatActivity {
         reference.child(this.userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Picasso.get().load(currentItem.getImage()).into(ivpic);
+
                 String name = snapshot.child("name").getValue().toString();
                 tvname.setText(name);
+
                 String username = snapshot.child("username").getValue().toString();
                 tvusername.setText(username);
-
 
                 String avatar = snapshot.child("avatar").getValue().toString();
                 Picasso.get().load(avatar).into(ivpic);
@@ -211,12 +204,6 @@ public class ProfileActivity extends AppCompatActivity {
                 if (description != "Description"){
                     getDescription().setVisibility(View.VISIBLE);
                 }
-
-                //if (avatar != )
-
-                pbProfile.setVisibility(View.GONE);
-
-
 
                 pbProfile.setVisibility(View.GONE);
 

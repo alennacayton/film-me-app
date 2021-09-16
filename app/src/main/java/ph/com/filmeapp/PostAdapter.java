@@ -41,9 +41,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public Context cxt;
     private ArrayList<Post> postArrayList;
 
-
-    DatabaseReference commentRef, postRef, userRef;
-
     private FirebaseAuth mAuth;
     private String userId;
     private FirebaseUser user;
@@ -58,7 +55,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
 
-
     @NonNull
     @NotNull
     @Override
@@ -68,11 +64,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return new PostViewHolder(view);
 
 
-
     }
-
-
-
 
 
 
@@ -82,20 +74,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         Post currentItem = postArrayList.get(position);
 
-      //  final String postKey = getRef(position).getKey();
-
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(cxt, LinearLayoutManager.VERTICAL, false);
         holder.commentRecyclerView.setLayoutManager(layoutManager);
 
 
         Picasso.get().load(currentItem.getImage()).into(holder.ivPoster);
         holder.tvDesc.setText(currentItem.getDescription());
-        holder.tvName.setText(currentItem.getName());
+        holder.tvName.setText("by " + currentItem.getName());
         holder.tvTitle.setText(currentItem.getTitle());
-        holder.tvRating.setText(currentItem.getRating());
+        holder.tvRating.setText("Rating : " + currentItem.getRating());
 
-       Toast.makeText(cxt, currentItem.getTitle(), Toast.LENGTH_LONG).show();
+       // Toast.makeText(cxt, currentItem.getTitle(), Toast.LENGTH_LONG).show();
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -144,7 +133,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     hm.put("name", mCurrName);
                     hm.put("avatarId",profileImageUrlV);
 
-                    Toast.makeText(cxt, mCurrName, Toast.LENGTH_LONG).show();
+                   // Toast.makeText(cxt, mCurrName, Toast.LENGTH_LONG).show();
 
 
 

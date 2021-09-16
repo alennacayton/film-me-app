@@ -273,8 +273,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 tvTitle.setText(title);
                 tvDesc.setText(description);
-                tvRating.setText(rating);
-                tvName.setText(name);
+                tvRating.setText("Rating : " + rating);
+                tvName.setText("by " + name);
                 Picasso.get().load(image).into(ivPoster);
 
 

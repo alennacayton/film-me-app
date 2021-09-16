@@ -60,7 +60,6 @@ public class EditProfileActivity extends AppCompatActivity {
     Uri imageUri;
 
 
-
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Collections.users.name());
 
 
@@ -100,8 +99,6 @@ public class EditProfileActivity extends AppCompatActivity {
         this.initFirebase();
 
 
-
-
         btupdate.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -117,30 +114,21 @@ public class EditProfileActivity extends AppCompatActivity {
                 if(imageUri != null)
                 {
                     StorageReference storageReference = storage.getReference().child("user_images" + UUID.randomUUID().toString());
-
                     storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<UploadTask.TaskSnapshot> task) {
-
                             if(task.isSuccessful()){
-
-
                                 storageReference .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
 
-
                                         HashMap hashMap = new HashMap();
                                         hashMap.put("avatar", uri.toString());
-                                        Toast.makeText(EditProfileActivity.this, uri.toString(), Toast.LENGTH_SHORT).show();
                                         hashMap.put("name", name);
                                         hashMap.put("username", username);
                                         hashMap.put("description", description);
                                         hashMap.put("password", password);
                                         hashMap.put("email", email);
-
-
-                                        //etname.setText(name);
 
 
                                         reference.child(getuid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
@@ -149,28 +137,19 @@ public class EditProfileActivity extends AppCompatActivity {
                                                 pbUpdate.setVisibility(View.GONE);
                                             }
                                         });
-
-
                                     }
                                 });
-
-
 
                             } else{
 
                                 Toast.makeText(EditProfileActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
-
-
                         }
                     });
-
 
                 }
 
                 HashMap hashMap = new HashMap();
-                //hashMap.put("avatar", avatar_pic.toString());
-                //Toast.makeText(EditProfileActivity.this, avatar, Toast.LENGTH_SHORT).show();
                 hashMap.put("name", name);
                 hashMap.put("username", username);
                 hashMap.put("description", description);
