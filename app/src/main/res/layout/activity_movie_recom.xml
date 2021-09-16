@@ -132,6 +132,19 @@
 
         app:menu="@menu/menu_navigation" />
 
+    <TextView
+        android:id="@+id/no_data_hp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.3"
+        android:text="No Posts "
+        android:visibility="gone"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rv_posts_home"
+        app:layout_constraintTop_toTopOf="@+id/rv_posts_home" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

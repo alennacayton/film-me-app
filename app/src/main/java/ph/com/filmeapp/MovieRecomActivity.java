@@ -42,6 +42,7 @@ public class MovieRecomActivity extends AppCompatActivity {
     private ImageButton ibBack;
     private TextView tvGenreHome;
     private ConstraintLayout clBackground;
+    private TextView no_data_hp;
    // private ImageView ivSendComment;
 
 
@@ -50,7 +51,6 @@ public class MovieRecomActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String userId;
     private FirebaseUser user;
-
 
 
 
@@ -108,6 +108,7 @@ public class MovieRecomActivity extends AppCompatActivity {
         this.ibBack = findViewById(R.id.ib_back_mr);
         this.tvGenreHome = findViewById(R.id.tv_genre_home);
         this.clBackground = findViewById(R.id.cl_mr);
+        this.no_data_hp = findViewById(R.id.no_data_hp);
 
 
         initFirebase();
@@ -136,8 +137,6 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
 
-
-
         postRecyclerView = findViewById(R.id.rv_posts_home);
         database = FirebaseDatabase.getInstance().getReference("posts");
         postRecyclerView.setHasFixedSize(true);
@@ -150,9 +149,6 @@ public class MovieRecomActivity extends AppCompatActivity {
         postRecyclerView.setAdapter(postAdapter);
 
         //
-
-
-
 
 
         if(getIntent().getStringExtra("item").equals("Romance"))
@@ -175,7 +171,11 @@ public class MovieRecomActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                 }
+
             });
+
+
+
 
 
 
@@ -204,8 +204,6 @@ public class MovieRecomActivity extends AppCompatActivity {
                 }
             });
 
-
-
         }
 
 
@@ -230,6 +228,8 @@ public class MovieRecomActivity extends AppCompatActivity {
 
                 }
             });
+
+
 
 
 
@@ -259,7 +259,6 @@ public class MovieRecomActivity extends AppCompatActivity {
             });
 
 
-
         }
 
 
@@ -286,6 +285,7 @@ public class MovieRecomActivity extends AppCompatActivity {
 
 
 
+
         }
 
 
@@ -309,7 +309,6 @@ public class MovieRecomActivity extends AppCompatActivity {
 
                 }
             });
-
 
 
         }

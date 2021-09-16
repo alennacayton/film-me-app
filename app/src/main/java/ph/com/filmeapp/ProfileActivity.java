@@ -45,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ProgressBar pbProfile;
     private RecyclerView rvPosts;
 
+    private TextView no_data;
 
 // postRecyclerView >> rvPosts
 
@@ -123,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     Post post = dataSnapshot.getValue(Post.class);
@@ -137,7 +139,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-
 
 
 
